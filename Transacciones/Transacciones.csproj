@@ -21,4 +21,8 @@
     <ProjectReference Include="..\Transacciones.Negocio\Transacciones.Negocio.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="BD\" />
+  </ItemGroup>
+
 </Project>
