@@ -117,12 +117,12 @@ namespace Transacciones.Controllers
                 List<CuentaDTO> Cuentas = await _cuentaService.ObtenerCuentas();
                 var cuentaDto = Cuentas.Where(p => p.Id == movimiento.CuentaId).FirstOrDefault();
                 if (cuentaDto == null || string.IsNullOrEmpty(cuentaDto.NumeroCuenta))
-                    return BadRequest($"El movimiento con cuentaId {movimiento.CuentaId} no se puede adicionar ya que ");
+                    return BadRequest($"El movimiento con cuentaId {movimiento.CuentaId} no se puede adicionar verifique que el campo CuentaId tenga una cuenta asociada");
 
                 //Validacion del Saldo
                 decimal? saldoCuenta = cuentaDto.Saldo;
                 decimal? SaldoMovimiento = movimiento.Saldo;
-                if(SaldoMovimiento < 0)
+                if (SaldoMovimiento < 0)
                 {
                     if (0 > (saldoCuenta + SaldoMovimiento))
                         return BadRequest("Saldo no disponible");
@@ -140,20 +140,7 @@ namespace Transacciones.Controllers
 
                 if (resultadoActualizacionCuenta)
                 {
-                    //generacion Id y adicion cuenta
-                    List<MovimientoDTO> MovimientoDTOs = await _movimientoServices.ObtenerMovimientos();
-                    int Id = 0;
-                    if (MovimientoDTOs != null && MovimientoDTOs.Count > 0)
-                    {
-                        Id = MovimientoDTOs.FirstOrDefault().Id + 1;
-                    }
-                    else
-                    {
-                        Id = 1;
-                    }
-
                     MovimientoDTO MovimientoClonado = movimiento.Clone() as MovimientoDTO;
-                    MovimientoClonado.Id = Id;
 
                     resultado = await _movimientoServices.AdicionarMovimiento(MovimientoClonado);
                     if (resultado)

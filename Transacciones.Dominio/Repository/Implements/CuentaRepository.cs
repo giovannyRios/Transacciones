@@ -17,10 +17,10 @@ namespace Transacciones.Dominio.Repository.Implements
         {
             _context = transaccionesContext;
         }
-        public async Task<bool> ActualizarCuenta(Cuentum cuenta)
+        public async Task<bool> ActualizarCuenta(Cuenta cuenta)
         {
 
-            var FindCuenta = _context.Cuenta.Find(cuenta.Id);
+            var FindCuenta = _context.Cuentas.Find(cuenta.Id);
             if (FindCuenta != null)
             {
                 FindCuenta.Estado = cuenta.Estado;
@@ -31,16 +31,16 @@ namespace Transacciones.Dominio.Repository.Implements
 
         }
 
-        public async Task<bool> AdicionarCuenta(Cuentum cuenta)
+        public async Task<bool> AdicionarCuenta(Cuenta cuenta)
         {
-            _context.Cuenta.Add(cuenta);
+            _context.Cuentas.Add(cuenta);
             return await _context.SaveChangesAsync() > 0;
         }
 
-        public async Task<bool> EliminarCuenta(Cuentum cuenta)
+        public async Task<bool> EliminarCuenta(Cuenta cuenta)
         {
 
-            _context.Cuenta.Remove(cuenta);
+            _context.Cuentas.Remove(cuenta);
             return await _context.SaveChangesAsync() > 0;
 
         }
@@ -48,13 +48,13 @@ namespace Transacciones.Dominio.Repository.Implements
         public async Task<bool> EliminarCuentasPorClienteId(int ClienteId)
         {
             int resultado = 0;
-            List<Cuentum> listaEliminar = new List<Cuentum>();
-            listaEliminar = await _context.Cuenta.Where(cuenta => cuenta.ClienteId == ClienteId).ToListAsync();
+            List<Cuenta> listaEliminar = new List<Cuenta>();
+            listaEliminar = await _context.Cuentas.Where(cuenta => cuenta.ClienteId == ClienteId).ToListAsync();
             if (listaEliminar.Count > 0)
             {
                 foreach (var item in listaEliminar)
                 {
-                    _context.Cuenta.Remove(item);
+                    _context.Cuentas.Remove(item);
                     resultado += _context.SaveChanges();
                 }
             }
@@ -62,21 +62,21 @@ namespace Transacciones.Dominio.Repository.Implements
 
         }
 
-        public async Task<Cuentum> ObtenerCuentaPorNumeroCuenta(string NumeroCuenta)
+        public async Task<Cuenta> ObtenerCuentaPorNumeroCuenta(string NumeroCuenta)
         {
-            return await _context.Cuenta.Where(cuenta => cuenta.NumeroCuenta == NumeroCuenta).FirstOrDefaultAsync();
+            return await _context.Cuentas.Where(cuenta => cuenta.NumeroCuenta == NumeroCuenta).FirstOrDefaultAsync();
         }
 
-        public async Task<List<Cuentum>> ObtenerCuentas()
+        public async Task<List<Cuenta>> ObtenerCuentas()
         {
-            return await _context.Cuenta.OrderByDescending(p => p.Id).ToListAsync();
+            return await _context.Cuentas.OrderByDescending(p => p.Id).ToListAsync();
         }
 
-        public async Task<List<Cuentum>> ObtenerCuentasPorClienteId(int ClienteId)
+        public async Task<List<Cuenta>> ObtenerCuentasPorClienteId(int ClienteId)
         {
     
-                List<Cuentum> cuentas = new List<Cuentum>();
-                cuentas = await _context.Cuenta.Where(cuenta => cuenta.ClienteId == ClienteId).ToListAsync();
+                List<Cuenta> cuentas = new List<Cuenta>();
+                cuentas = await _context.Cuentas.Where(cuenta => cuenta.ClienteId == ClienteId).ToListAsync();
 
                 if (cuentas != null && cuentas.Count > 0)
                 {

@@ -25,10 +25,10 @@ namespace Transacciones.Negocio.Services.Implements
         {
             bool resultado = false;
 
-            Cuentum clienteDto = await _cuentaRepository.ObtenerCuentaPorNumeroCuenta(cuenta.NumeroCuenta);
+            Cuenta clienteDto = await _cuentaRepository.ObtenerCuentaPorNumeroCuenta(cuenta.NumeroCuenta);
             if (clienteDto != null)
             {
-                resultado = await _cuentaRepository.ActualizarCuenta(_mapper.Map<Cuentum>(cuenta));
+                resultado = await _cuentaRepository.ActualizarCuenta(_mapper.Map<Cuenta>(cuenta));
             }
 
             return resultado;
@@ -38,10 +38,10 @@ namespace Transacciones.Negocio.Services.Implements
         {
             bool resultado = false;
 
-            Cuentum clienteDto = await _cuentaRepository.ObtenerCuentaPorNumeroCuenta(cuenta.NumeroCuenta);
+            Cuenta clienteDto = await _cuentaRepository.ObtenerCuentaPorNumeroCuenta(cuenta.NumeroCuenta);
             if (clienteDto == null)
             {
-                resultado = await _cuentaRepository.AdicionarCuenta(_mapper.Map<Cuentum>(cuenta));
+                resultado = await _cuentaRepository.AdicionarCuenta(_mapper.Map<Cuenta>(cuenta));
             }
 
             return resultado;
@@ -51,7 +51,7 @@ namespace Transacciones.Negocio.Services.Implements
         {
             bool resultado = false;
 
-            Cuentum clienteDto = await _cuentaRepository.ObtenerCuentaPorNumeroCuenta(cuenta.NumeroCuenta);
+            Cuenta clienteDto = await _cuentaRepository.ObtenerCuentaPorNumeroCuenta(cuenta.NumeroCuenta);
             if (clienteDto != null)
             {
                 resultado = await _cuentaRepository.EliminarCuenta(clienteDto);
@@ -64,7 +64,7 @@ namespace Transacciones.Negocio.Services.Implements
         {
             bool resultado = false;
             int conteoResultado = 0;
-            List<Cuentum> clienteDto = await _cuentaRepository.ObtenerCuentasPorClienteId(ClienteId);
+            List<Cuenta> clienteDto = await _cuentaRepository.ObtenerCuentasPorClienteId(ClienteId);
             if (clienteDto != null && clienteDto.Count > 0)
             {
                 foreach (var cliente in clienteDto)
@@ -81,7 +81,7 @@ namespace Transacciones.Negocio.Services.Implements
 
         public async Task<CuentaDTO> ObtenerCuentaPorNumeroCuenta(string NumeroCuenta)
         {
-            Cuentum clienteDto = await _cuentaRepository.ObtenerCuentaPorNumeroCuenta(NumeroCuenta);
+            Cuenta clienteDto = await _cuentaRepository.ObtenerCuentaPorNumeroCuenta(NumeroCuenta);
             if (clienteDto != null)
             {
                 return _mapper.Map<CuentaDTO>(clienteDto);
@@ -93,7 +93,7 @@ namespace Transacciones.Negocio.Services.Implements
         public async Task<List<CuentaDTO>> ObtenerCuentas()
         {
             List<CuentaDTO> cuentaDTOs = new List<CuentaDTO>();
-            List<Cuentum> cuentas = await _cuentaRepository.ObtenerCuentas();
+            List<Cuenta> cuentas = await _cuentaRepository.ObtenerCuentas();
             if (cuentas != null && cuentas.Count > 0)
                 cuentaDTOs.AddRange(_mapper.Map<List<CuentaDTO>>(cuentas));
             return cuentaDTOs;
@@ -102,7 +102,7 @@ namespace Transacciones.Negocio.Services.Implements
         public async Task<List<CuentaDTO>> ObtenerCuentasPorClienteId(int ClienteId)
         {
             List<CuentaDTO> cuentaDTOs = new List<CuentaDTO>();
-            List<Cuentum> cuentas = await _cuentaRepository.ObtenerCuentasPorClienteId(ClienteId);
+            List<Cuenta> cuentas = await _cuentaRepository.ObtenerCuentasPorClienteId(ClienteId);
             if (cuentas != null && cuentas.Count > 0)
                 cuentaDTOs.AddRange(_mapper.Map<List<CuentaDTO>>(cuentas));
             return cuentaDTOs;

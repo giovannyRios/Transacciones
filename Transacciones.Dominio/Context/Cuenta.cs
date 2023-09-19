@@ -6,9 +6,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Transacciones.Dominio.Context;
 
-[Index("NumeroCuenta", Name = "Clave")]
 [Index("NumeroCuenta", Name = "UQ_NumeroCuenta", IsUnique = true)]
-public partial class Cuentum
+public partial class Cuenta
 {
     [Key]
     [Column("ID")]
@@ -23,6 +22,12 @@ public partial class Cuentum
 
     [Column(TypeName = "numeric(18, 2)")]
     public decimal? Saldo { get; set; }
+
+    [Column("Fecha_Creacion", TypeName = "date")]
+    public DateTime? FechaCreacion { get; set; }
+
+    [Column("Fecha_Actualizacion", TypeName = "date")]
+    public DateTime? FechaActualizacion { get; set; }
 
     public bool? Estado { get; set; }
 

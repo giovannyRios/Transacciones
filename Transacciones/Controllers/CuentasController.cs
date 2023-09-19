@@ -116,26 +116,13 @@ namespace Transacciones.Controllers
                     return BadRequest($"La cuenta {cuenta.NumeroCuenta} ya existe en el sistema");
 
                 //Validacion Cliente
-                List<ClienteDTO> clienteDTO = await _clienteService.ObtenerClientes();
+                List<ClienteDTO> clienteDTO = await _clienteService.obtenerClientes();
                 ClienteDTO FindCliente = clienteDTO.Where(x => x.Id == cuenta.ClienteId).FirstOrDefault();
                 if (FindCliente == null)
                     return BadRequest($"La cuenta {cuenta.NumeroCuenta} debe estar asociada a un cliente que exista, recuerde el campo ClienteId");
 
-                //generacion Id y adicion cuenta
-                List<CuentaDTO> cuentaDTOs = await _cuentaService.ObtenerCuentas();
-                int Id = 0;
-                if (cuentaDTOs != null && cuentaDTOs.Count > 0)
-                {
-                    Id = cuentaDTOs.FirstOrDefault().Id + 1;
-                }
-                else
-                {
-                    Id = 1;
-                }
-
                 CuentaDTO cuentaClonado = cuenta.Clone() as CuentaDTO;
-                cuentaClonado.Id = Id;
-
+                
                 resultado = await _cuentaService.AdicionarCuenta(cuentaClonado);
 
                 if (resultado)

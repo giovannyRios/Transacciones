@@ -12,81 +12,58 @@ namespace Transacciones.Dominio.Repository.Implements
     public class ClienteRepository : IclienteRepository
     {
         private readonly TransaccionesContext _context;
+
         public ClienteRepository(TransaccionesContext transaccionesContext)
         {
             _context = transaccionesContext;
         }
-        public async Task<bool> ActualizarCliente(Cliente cliente)
+        public async Task<bool> ActualizarCliente(Cliente Cliente)
         {
-
-            Cliente FindCliente = await _context.Clientes.Where(client => client.ClienteId == cliente.ClienteId).FirstOrDefaultAsync();
+            Cliente FindCliente = await _context.Clientes.Where(p => p.Identificacion == Cliente.Identificacion).FirstOrDefaultAsync();
             bool resultado = false;
             if (FindCliente != null)
             {
-                FindCliente.Contrasena = cliente.Contrasena;
-                FindCliente.Estado = cliente.Estado;
-                FindCliente.PersonaId = cliente.PersonaId;
+                FindCliente.Direccion = Cliente.Direccion;
+                FindCliente.Edad = Cliente.Edad;
+                FindCliente.Identificacion = Cliente.Identificacion;
+                FindCliente.Telefono = Cliente.Telefono;
+                FindCliente.GeneroId = Cliente.GeneroId;
+                FindCliente.Nombre = Cliente.Nombre;
+                FindCliente.FechaActualizacion = Cliente.FechaActualizacion;
+                FindCliente.Estado = FindCliente.Estado;
                 resultado = await _context.SaveChangesAsync() > 0;
             }
 
             return resultado;
-
         }
 
-        public async Task<bool> AdicionarCliente(Context.Cliente cliente)
+        public async Task<bool> AdicionarCliente(Cliente Cliente)
         {
-            _context.Clientes.Add(cliente);
+            _context.Clientes.Add(Cliente);
             return await _context.SaveChangesAsync() > 0;
         }
 
-        public async Task<bool> EliminarCliente(Context.Cliente cliente)
+        public async Task<bool> EliminarCliente(Cliente Cliente)
         {
-            _context.Clientes.Remove(cliente);
+            _context.Clientes.Remove(Cliente);
             return await _context.SaveChangesAsync() > 0;
         }
 
-        public async Task<bool> EliminarClientesPorPersonaId(int personaId)
+        public async Task<Cliente> ObtenerClientePorId(int Id)
         {
-            int resultado = 0;
-            List<Cliente> listaEliminar = new List<Cliente>();
-            listaEliminar = await _context.Clientes.Where(cliente => cliente.PersonaId == personaId).ToListAsync();
-            if (listaEliminar.Count > 0)
-            {
-                foreach (var item in listaEliminar)
-                {
-                    _context.Clientes.Remove(item);
-                    resultado += await _context.SaveChangesAsync();
-                }
-            }
-            return resultado > 0;
-
-
+            Cliente FindCliente = await _context.Clientes.Where(Cliente => Cliente.Id == Id).FirstOrDefaultAsync();
+            return FindCliente != null ? FindCliente : null;
         }
 
-        public async Task<Cliente> ObtenerClientePorClienteId(string ClienteId)
+        public async Task<Cliente> ObtenerClientePorIdentificacion(string numeroIdentificacion)
         {
-            return await _context.Clientes.Where(cliente => cliente.ClienteId == ClienteId).FirstOrDefaultAsync();
+            Cliente FindCliente = await _context.Clientes.Where(Cliente => Cliente.Identificacion == numeroIdentificacion).FirstOrDefaultAsync();
+            return FindCliente != null ? FindCliente : null;
         }
 
         public async Task<List<Cliente>> ObtenerClientes()
         {
             return await _context.Clientes.OrderByDescending(p => p.Id).ToListAsync();
-        }
-
-        public async Task<List<Cliente>> ObtenerClientesPorPersonaId(int personaId)
-        {
-
-            List<Cliente> clientes = new List<Cliente>();
-            clientes = await _context.Clientes.Where(cliente => cliente.PersonaId == personaId).ToListAsync();
-
-            if (clientes != null && clientes.Count > 0)
-            {
-                return clientes;
-            }
-            else
-            {
-                return null;
-            }
         }
     }
 }

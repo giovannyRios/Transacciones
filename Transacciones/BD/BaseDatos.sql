@@ -1,117 +1,197 @@
-CREATE DATABASE Transacciones;
+CREATE DATABASE Transacciones
+GO
+ 
+USE Transacciones
 GO
 
-USE Transacciones;
 
-CREATE TABLE [Genero] (
-  [ID] Integer,
-  [Valor] nvarchar(100),
-  PRIMARY KEY ([ID])
-);
+CREATE TABLE [dbo].[Clientes](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[Nombre] [nvarchar](300) NULL,
+	[Genero_Id] [int] NULL,
+	[Edad] [int] NULL,
+	[Identificacion] [nvarchar](300) NULL,
+	[Direccion] [nvarchar](500) NULL,
+	[Telefono] [nvarchar](15) NULL,
+	[Contrasena] [nvarchar](100) NULL,
+	[Estado] [bit] NULL,
+	[Fecha_Creacion] [date] NULL,
+	[Fecha_Actualizacion] [date] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY],
+ CONSTRAINT [UQ_Contraseña] UNIQUE NONCLUSTERED 
+(
+	[Contrasena] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY],
+ CONSTRAINT [UQ_Identificacion] UNIQUE NONCLUSTERED 
+(
+	[Identificacion] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
 
+GO
 
-CREATE TABLE [Persona] (
-  [ID] Integer,
-  [Nombre] nvarchar(300),
-  [Genero_Id] Integer,
-  [Edad] Integer,
-  [Identificacion] nvarchar(300),
-  [Direccion] nvarchar(500),
-  [Telefono] nvarchar(15),
-  PRIMARY KEY ([ID])
-);
-CREATE INDEX [Clave] ON  [Persona] ([Identificacion]);
-ALTER TABLE [Persona] ADD CONSTRAINT FK_Genero_Id FOREIGN KEY ([Genero_Id]) REFERENCES [Genero]([ID])
-ALTER TABLE [Persona] ADD CONSTRAINT UQ_Identificacion UNIQUE ([Identificacion])
+CREATE TABLE [dbo].[Cuentas](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[NumeroCuenta] [nvarchar](50) NULL,
+	[TipoCuentaId] [int] NULL,
+	[ClienteId] [int] NULL,
+	[Saldo] [numeric](18, 2) NULL,
+	[Fecha_Creacion] [date] NULL,
+	[Fecha_Actualizacion] [date] NULL,
+	[Estado] [bit] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY],
+ CONSTRAINT [UQ_NumeroCuenta] UNIQUE NONCLUSTERED 
+(
+	[NumeroCuenta] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
 
+CREATE TABLE [dbo].[Genero](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[Valor] [nvarchar](50) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
 
+CREATE TABLE [dbo].[Movimientos](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[FechaMovimiento] [datetime] NULL,
+	[CuentaId] [int] NULL,
+	[Saldo] [numeric](18, 2) NULL,
+	[DescripcionMovimiento] [nvarchar](200) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
 
-CREATE TABLE [Cliente] (
-  [ID] Integer,
-  [ClienteId] Nvarchar(100),
-  [Contrasena] Nvarchar(100),
-  [PersonaId] Integer,
-  [Estado] BIT,
-  PRIMARY KEY ([ID])
-);
-CREATE INDEX [Clave] ON  [Cliente] ([ClienteId]);
-ALTER TABLE [Cliente] ADD CONSTRAINT FK_PersonaId FOREIGN KEY ([PersonaId]) REFERENCES [Persona]([ID])
-ALTER TABLE [Cliente] ADD CONSTRAINT UQ_ClientId UNIQUE ([ClienteId])
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Tipo_Cuenta](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[Valor] [nvarchar](30) NULL,
+	[Estado] [bit] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
 
-CREATE TABLE [Tipo Cuenta] (
-  [ID] Integer,
-  [Valor] nvarchar(200),
-  [Estado] BIT,
-  PRIMARY KEY ([ID])
-);
+CREATE NONCLUSTERED INDEX [IX_Fecha_Actuacion] ON [dbo].[Clientes]
+(
+	[Fecha_Actualizacion] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, FILLFACTOR = 80, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
 
-CREATE TABLE [Cuenta] (
-  [ID] Integer,
-  [NumeroCuenta] nvarchar(50),
-  [TipoCuentaId] Integer,
-  [ClienteId] Integer,
-  [Saldo] Numeric(18,2),
-  [Estado] BIT,
-  PRIMARY KEY ([ID])
-);
-CREATE INDEX [Clave] ON  [Cuenta] ([NumeroCuenta]);
-ALTER TABLE [Cuenta] ADD CONSTRAINT FK_TipoCuentaId FOREIGN KEY ([TipoCuentaId]) REFERENCES [Tipo Cuenta]([ID])
-ALTER TABLE [Cuenta] ADD CONSTRAINT FK_ClienteId FOREIGN KEY ([ClienteId]) REFERENCES [Cliente]([ID])
-ALTER TABLE [Cuenta] ADD CONSTRAINT UQ_NumeroCuenta UNIQUE ([NumeroCuenta])
+CREATE NONCLUSTERED INDEX [IX_Fecha_Creacion] ON [dbo].[Clientes]
+(
+	[Fecha_Creacion] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, FILLFACTOR = 80, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
+SET ANSI_PADDING ON
+GO
 
-CREATE TABLE [Movimientos] (
-  [ID] Integer,
-  [FechaMovimiento] Datetime,
-  [CuentaId] Integer,
-  [Saldo] Numeric(18,2),
-  [DescripcionMovimiento] nvarchar(500),
-  PRIMARY KEY ([ID])
-);
-CREATE INDEX [Clave] ON  [Movimientos] ([FechaMovimiento]);
-ALTER TABLE [Movimientos] ADD CONSTRAINT FK_CuentaId FOREIGN KEY ([CuentaId]) REFERENCES [Cuenta]([ID])
+CREATE NONCLUSTERED INDEX [IX_Identificacion] ON [dbo].[Clientes]
+(
+	[Identificacion] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, FILLFACTOR = 80, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
 
+CREATE NONCLUSTERED INDEX [IX_Cliente_Id] ON [dbo].[Cuentas]
+(
+	[ClienteId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, FILLFACTOR = 80, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
 
---Minimal Data
-INSERT INTO [dbo].[Genero]
-           ([ID]
-           ,[Valor])
-     VALUES
-           (1
-           ,'Masculino')
+CREATE NONCLUSTERED INDEX [IX_Fecha_Actualizacion_cuenta] ON [dbo].[Cuentas]
+(
+	[Fecha_Actualizacion] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, FILLFACTOR = 80, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
 
-INSERT INTO [dbo].[Genero]
-           ([ID]
-           ,[Valor])
-     VALUES
-           (2
-           ,'Femenino')
+CREATE NONCLUSTERED INDEX [IX_Fecha_Creacion_cuenta] ON [dbo].[Cuentas]
+(
+	[Fecha_Creacion] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, FILLFACTOR = 80, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
+SET ANSI_PADDING ON
+GO
 
-INSERT INTO [dbo].[Genero]
-           ([ID]
-           ,[Valor])
-     VALUES
-           (3
-           ,'Otro')
+CREATE NONCLUSTERED INDEX [IX_NumeroCuenta] ON [dbo].[Cuentas]
+(
+	[NumeroCuenta] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, FILLFACTOR = 80, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
 
+CREATE NONCLUSTERED INDEX [Clave] ON [dbo].[Movimientos]
+(
+	[FechaMovimiento] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
 
-INSERT INTO [dbo].[Tipo Cuenta]
-           ([ID]
-           ,[Valor]
+CREATE NONCLUSTERED INDEX [IX_FechaMovimiento] ON [dbo].[Movimientos]
+(
+	[FechaMovimiento] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, FILLFACTOR = 80, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
+ALTER TABLE [dbo].[Cuentas]  WITH CHECK ADD  CONSTRAINT [FK_ClienteId] FOREIGN KEY([ClienteId])
+REFERENCES [dbo].[Clientes] ([ID])
+GO
+ALTER TABLE [dbo].[Cuentas] CHECK CONSTRAINT [FK_ClienteId]
+GO
+ALTER TABLE [dbo].[Cuentas]  WITH CHECK ADD  CONSTRAI	NT [FK_TipoCuentaId] FOREIGN KEY([TipoCuentaId])
+REFERENCES [dbo].[Tipo_Cuenta] ([ID])
+GO
+ALTER TABLE [dbo].[Cuentas] CHECK CONSTRAINT [FK_TipoCuentaId]
+GO
+ALTER TABLE [dbo].[Movimientos]  WITH CHECK ADD  CONSTRAINT [FK_CuentaId] FOREIGN KEY([CuentaId])
+REFERENCES [dbo].[Cuentas] ([ID])
+GO
+ALTER TABLE [dbo].[Movimientos] CHECK CONSTRAINT [FK_CuentaId]
+GO
+
+ALTER TABLE [dbo].[Clientes] ADD CONSTRAINT FK_generoId FOREIGN KEY ([Genero_Id]) REFERENCES [dbo].[Genero](ID)
+GO
+
+INSERT INTO [dbo].[Tipo_Cuenta]
+           ([Valor]
            ,[Estado])
      VALUES
-           (1
-           ,'Ahorro'
+           ('Ahorro'
            ,1)
 
-INSERT INTO [dbo].[Tipo Cuenta]
-           ([ID]
-           ,[Valor]
+		   INSERT INTO [dbo].[Tipo_Cuenta]
+           ([Valor]
            ,[Estado])
      VALUES
-           (2
-           ,'Corriente'
+           ('Corriente'
            ,1)
 
+INSERT INTO [dbo].[Genero]
+           ([Valor])
+     VALUES
+           ('Masculino')
 
+INSERT INTO [dbo].[Genero]
+           ([Valor])
+     VALUES
+           ('Femenino')
 
-
+INSERT INTO [dbo].[Genero]
+           ([Valor])
+     VALUES
+           ('Otro')

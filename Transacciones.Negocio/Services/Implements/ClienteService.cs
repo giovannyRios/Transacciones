@@ -5,7 +5,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Transacciones.Dominio.Context;
-using Transacciones.Dominio.Repository.Implements;
 using Transacciones.Dominio.Repository.Interfaces;
 using Transacciones.Negocio.DTO;
 using Transacciones.Negocio.Services.Interfaces;
@@ -16,104 +15,89 @@ namespace Transacciones.Negocio.Services.Implements
     {
         private readonly IclienteRepository _clienteRepository;
         private readonly IMapper _mapper;
-        public ClienteService(IclienteRepository iclienteRepository, IMapper mapper)
+
+        public ClienteService(IclienteRepository ClienteRepository, IMapper mapper)
         {
+            _clienteRepository = ClienteRepository;
             _mapper = mapper;
-            _clienteRepository = iclienteRepository;
         }
-        public async Task<bool> ActualizarCliente(ClienteDTO cliente)
+        public async Task<bool> ActualizarCliente(ClienteDTO clienteDTO)
         {
             bool resultado = false;
 
-            Cliente clienteDto = await _clienteRepository.ObtenerClientePorClienteId(cliente.ClienteId);
-            if (clienteDto != null)
+            Cliente Cliente = await _clienteRepository.ObtenerClientePorIdentificacion(clienteDTO.Identificacion);
+            if (Cliente != null)
             {
-                resultado = await _clienteRepository.ActualizarCliente(_mapper.Map<Cliente>(cliente));
+                resultado = await _clienteRepository.ActualizarCliente(_mapper.Map<Cliente>(clienteDTO));
             }
 
             return resultado;
+
         }
 
-        public async Task<bool> AdicionarCliente(ClienteDTO cliente)
+        public async Task<bool> AdicionarCliente(ClienteDTO clienteDTO)
         {
             bool resultado = false;
-            Cliente clienteDto = await _clienteRepository.ObtenerClientePorClienteId(cliente.ClienteId);
-            if (clienteDto == null)
+            Cliente Cliente = await _clienteRepository.ObtenerClientePorIdentificacion(clienteDTO.Identificacion);
+            if (Cliente == null)
             {
-                Cliente ClienteAdicional = _mapper.Map<Cliente>(cliente);
-                ClienteAdicional.ClienteId = Guid.NewGuid().ToString();
+                Cliente ClienteAdicional = _mapper.Map<Cliente>(clienteDTO);
                 resultado = await _clienteRepository.AdicionarCliente(ClienteAdicional);
             }
             return resultado;
+
         }
 
-        public async Task<bool> EliminarCliente(ClienteDTO cliente)
+        public async Task<bool> eliminarCliente(ClienteDTO clienteDTO)
         {
             bool resultado = false;
 
-            Cliente clienteDto = await _clienteRepository.ObtenerClientePorClienteId(cliente.ClienteId);
-            if (clienteDto != null)
+            Cliente Cliente = await _clienteRepository.ObtenerClientePorIdentificacion(clienteDTO.Identificacion);
+            if (Cliente != null)
             {
-                resultado = await _clienteRepository.EliminarCliente(clienteDto);
+                resultado = await _clienteRepository.EliminarCliente(Cliente);
             }
 
             return resultado;
+
         }
 
-        public async Task<bool> EliminarClientesPorPersonaId(int personaId)
+        public async Task<ClienteDTO> ObtenerClientePorId(int Id)
         {
-            int resultado = 0;
-            bool validacion = false;
-
-            List<Cliente> clientesDto = await _clienteRepository.ObtenerClientesPorPersonaId(personaId);
-            if (clientesDto != null)
+            Cliente Cliente = await _clienteRepository.ObtenerClientePorId(Id);
+            ClienteDTO clienteDTO = new ClienteDTO();
+            if (Cliente != null)
             {
-                foreach (var cliente in clientesDto)
-                {
-                    validacion = await _clienteRepository.EliminarCliente(cliente);
-                    if (validacion)
-                    {
-                        resultado++;
-                    }
-                }
-
+                clienteDTO = _mapper.Map<ClienteDTO>(Cliente);
             }
 
-            return resultado > 0;
+            return clienteDTO;
         }
 
-        public async Task<ClienteDTO> ObtenerClientePorClienteId(string ClienteId)
+        public async Task<ClienteDTO> ObtenerClientePorNumeroIdentificacion(string numeroIdentificacion)
         {
-            Cliente clienteDto = await _clienteRepository.ObtenerClientePorClienteId(ClienteId);
-            if (clienteDto != null)
-                return _mapper.Map<ClienteDTO>(clienteDto);
-            return null;
-
-
-        }
-
-        public async Task<List<ClienteDTO>> ObtenerClientes()
-        {
-            List<ClienteDTO> clienteDTOs = new List<ClienteDTO>();
-            List<Cliente> clientes = await _clienteRepository.ObtenerClientes();
-            if (clientes != null && clientes.Count > 0)
+            Cliente cliente = await _clienteRepository.ObtenerClientePorIdentificacion(numeroIdentificacion);
+            ClienteDTO clienteDTO = new ClienteDTO();
+            if (cliente != null)
             {
-                clienteDTOs.AddRange(_mapper.Map<List<ClienteDTO>>(clientes));
+                clienteDTO = _mapper.Map<ClienteDTO>(cliente);
             }
 
-            return clienteDTOs;
+            return clienteDTO;
         }
 
-        public async Task<List<ClienteDTO>> ObtenerClientesPorPersonaId(int personaId)
+        public async Task<List<ClienteDTO>> obtenerClientes()
         {
-            List<ClienteDTO> clienteDTOs = new List<ClienteDTO>();
-            List<Cliente> clientes = await _clienteRepository.ObtenerClientesPorPersonaId(personaId);
-            if (clientes != null && clientes.Count > 0)
+
+            List<Cliente> Clientes = await _clienteRepository.ObtenerClientes();
+            List<ClienteDTO> clienteDTO = new List<ClienteDTO>();
+            if (Clientes != null)
             {
-                clienteDTOs.AddRange(_mapper.Map<List<ClienteDTO>>(clientes));
+                clienteDTO.AddRange(_mapper.Map<List<ClienteDTO>>(Clientes));
             }
 
-            return clienteDTOs;
+            return clienteDTO;
+
         }
     }
 }

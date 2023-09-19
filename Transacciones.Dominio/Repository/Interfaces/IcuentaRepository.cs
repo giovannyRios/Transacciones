@@ -9,19 +9,19 @@ namespace Transacciones.Dominio.Repository.Interfaces
 {
     public interface IcuentaRepository
     {
-        public Task<bool> AdicionarCuenta(Cuentum cuenta);
+        public Task<bool> AdicionarCuenta(Cuenta cuenta);
 
-        public Task<bool> EliminarCuenta(Cuentum cuenta);
+        public Task<bool> EliminarCuenta(Cuenta cuenta);
 
-        public Task<Cuentum> ObtenerCuentaPorNumeroCuenta(string NumeroCuenta);
+        public Task<Cuenta> ObtenerCuentaPorNumeroCuenta(string NumeroCuenta);
 
-        public Task<List<Cuentum>> ObtenerCuentas();
+        public Task<List<Cuenta>> ObtenerCuentas();
 
-        public Task<List<Cuentum>> ObtenerCuentasPorClienteId(int ClienteId);
+        public Task<List<Cuenta>> ObtenerCuentasPorClienteId(int ClienteId);
 
         public Task<bool> EliminarCuentasPorClienteId(int ClienteId);
 
-        public Task<bool> ActualizarCuenta(Cuentum cuenta);
+        public Task<bool> ActualizarCuenta(Cuenta cuenta);
 
     }
 }

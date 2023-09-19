@@ -10,19 +10,16 @@ namespace Transacciones.Negocio.Services.Interfaces
 {
     public interface IClienteService
     {
-        public Task<bool> AdicionarCliente(ClienteDTO cliente);
+        public Task<bool> AdicionarCliente(ClienteDTO ClienteDTO);
 
-        public Task<bool> EliminarCliente(ClienteDTO cliente);
+        Task<bool> ActualizarCliente(ClienteDTO ClienteDTO);
 
-        public Task<ClienteDTO> ObtenerClientePorClienteId(string ClienteId);
+        Task<ClienteDTO> ObtenerClientePorNumeroIdentificacion(string numeroIdentificacion);
 
-        public Task<List<ClienteDTO>> ObtenerClientes();
+        Task<ClienteDTO> ObtenerClientePorId(int Id);
 
-        public Task<List<ClienteDTO>> ObtenerClientesPorPersonaId(int personaId);
+        Task<List<ClienteDTO>>  obtenerClientes();
 
-        public Task<bool> EliminarClientesPorPersonaId(int personaId);
-
-        public Task<bool> ActualizarCliente(ClienteDTO cliente);
-
+        Task<bool> eliminarCliente(ClienteDTO ClienteDTO);
     }
 }

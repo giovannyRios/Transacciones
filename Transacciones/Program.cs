@@ -25,14 +25,12 @@ builder.Services.AddScoped<IcuentaRepository,CuentaRepository>();
 builder.Services.AddScoped<IMovimientosRepository,MovimientoRepository>();
 builder.Services.AddScoped<ITipoCuentaRepository,TipoCuentaRepository>();
 builder.Services.AddScoped<IGeneroRepository,GeneroRepository>();
-builder.Services.AddScoped<IPersonaRepository, PersonaRepository>();
 
 //Add Mapper
 var config = new MapperConfig();
 builder.Services.AddSingleton(config.getMappper());
 
 //Inyecta las dependencias de los servicios a ser utilizados por los controladores del API
-builder.Services.AddScoped<IPersonaService, PersonaService>();
 builder.Services.AddScoped<IGeneroService, GenerosServices>();
 builder.Services.AddScoped<ITipoCuentaService,TipoCuentaService>();
 builder.Services.AddScoped<IClienteService,ClienteService>();

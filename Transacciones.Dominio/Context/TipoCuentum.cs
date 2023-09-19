@@ -6,18 +6,18 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Transacciones.Dominio.Context;
 
-[Table("Tipo Cuenta")]
+[Table("Tipo_Cuenta")]
 public partial class TipoCuentum
 {
     [Key]
     [Column("ID")]
     public int Id { get; set; }
 
-    [StringLength(200)]
+    [StringLength(30)]
     public string? Valor { get; set; }
 
     public bool? Estado { get; set; }
 
     [InverseProperty("TipoCuenta")]
-    public virtual ICollection<Cuentum> Cuenta { get; set; } = new List<Cuentum>();
+    public virtual ICollection<Cuenta> Cuenta { get; set; } = new List<Cuenta>();
 }

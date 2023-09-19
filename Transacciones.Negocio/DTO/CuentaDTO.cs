@@ -29,7 +29,19 @@ namespace Transacciones.Negocio.DTO
 
         [Required(ErrorMessage = "El campo Saldo es requerido")]
         public decimal? Saldo { get; set; }
+
+        [Required(ErrorMessage = "El campo estado es requerido")]
         public bool? Estado { get; set; }
+
+        [Required(ErrorMessage = "El valor  FechaCreacion es requerido")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd-MM-yyyy}")]
+        [DataType(DataType.Date)]
+        public DateTime? FechaCreacion { get; set; }
+
+        [Required(ErrorMessage = "El valor  FechaActualizacion es requerido")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd-MM-yyyy}")]
+        [DataType(DataType.Date)]
+        public DateTime? FechaActualizacion { get; set; }
 
         public object Clone()
         {

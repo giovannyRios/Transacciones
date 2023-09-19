@@ -9,19 +9,17 @@ namespace Transacciones.Dominio.Repository.Interfaces
 {
     public interface IclienteRepository
     {
-        public Task<bool> AdicionarCliente(Cliente cliente);
+        public Task<bool> AdicionarCliente(Cliente Cliente);
 
-        public Task<bool> EliminarCliente(Cliente cliente);
+        public Task<bool> EliminarCliente(Cliente Cliente);
 
-        public Task<Cliente> ObtenerClientePorClienteId(string ClienteId);
+        public Task<Cliente> ObtenerClientePorIdentificacion(string numeroIdentificacion);
+
+        public Task<Cliente> ObtenerClientePorId(int Id);
 
         public Task<List<Cliente>> ObtenerClientes();
 
-        public Task<List<Cliente>> ObtenerClientesPorPersonaId(int personaId);
-
-        public Task<bool> EliminarClientesPorPersonaId(int personaId);
-
-        public Task<bool> ActualizarCliente(Cliente cliente);
+        public Task<bool> ActualizarCliente(Cliente Cliente);
 
 
     }

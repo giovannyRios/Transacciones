@@ -9,14 +9,12 @@ namespace Transacciones.Controllers
     public class ReportesController : ControllerBase
     {
         private readonly IClienteService _clienteService;
-        private readonly IPersonaService _personaService;
         private readonly ICuentaService _cuentaService;
         private readonly ITipoCuentaService _tipoCuentaService;
         private readonly IMovimientoServices _movimientoServices;
-        public ReportesController(IMovimientoServices movimientoServices, IPersonaService personaService, IClienteService clienteService, ITipoCuentaService tipoCuentaService, ICuentaService cuentaService)
+        public ReportesController(IMovimientoServices movimientoServices, IClienteService clienteService, ITipoCuentaService tipoCuentaService, ICuentaService cuentaService)
         {
             _movimientoServices = movimientoServices;
-            _personaService = personaService;
             _clienteService = clienteService;
             _cuentaService = cuentaService;
             _tipoCuentaService = tipoCuentaService;
@@ -42,8 +40,7 @@ namespace Transacciones.Controllers
                 {
                     var listaMovimientos = await _movimientoServices.ObtenerMovimientos();
                     var listaCuentas = await _cuentaService.ObtenerCuentas();
-                    var ListaClientes = await _clienteService.ObtenerClientes();
-                    var ListaPersonas = await _personaService.obtenerPersonas();
+                    var ListaClientes = await _clienteService.obtenerClientes();
                     
 
                     var ListaMovimientosFiltrada = listaMovimientos.Where(movimiento => movimiento.FechaMovimiento >= rangoFechas.FechaInicio && movimiento.FechaMovimiento <= rangoFechas.FechaFIn).ToList();
@@ -65,9 +62,9 @@ namespace Transacciones.Controllers
                             reporteDTO.Estado = (bool)cuenta.Estado;
 
                             var cliente = ListaClientes.Where(cliente => cliente.Id == cuenta.ClienteId).FirstOrDefault();
-                            var persona = ListaPersonas.Where(persona => persona.Id == cliente.PersonaId).FirstOrDefault();
+                           
 
-                            reporteDTO.Cliente = persona.Nombre;
+                            reporteDTO.Cliente = cliente.Nombre;
 
                             reportes.Add(reporteDTO);
 

@@ -24,20 +24,40 @@ namespace Transacciones.Negocio.MappingEntities
                     opt => opt.MapFrom(src => src.Estado)
                 )
                 .ForMember(
-                    dest => dest.ClienteId,
-                    opt => opt.MapFrom(src => src.ClienteId)
-                )
-                .ForMember(
-                    dest => dest.PersonaId,
-                    opt => opt.MapFrom(src => src.PersonaId)
-                )
-                .ForMember(
                     dest => dest.Contrasena,
                     opt => opt.MapFrom(src => src.Contrasena)
-                ).ReverseMap();
+                ).ForMember(
+                    dest => dest.Identificacion,
+                    opt => opt.MapFrom(src => src.Identificacion)
+                )
+                .ForMember(
+                    dest => dest.Edad,
+                    opt => opt.MapFrom(src => src.Edad)
+                )
+                .ForMember(
+                    dest => dest.Telefono,
+                    opt => opt.MapFrom(src => src.Telefono)
+                )
+                .ForMember(
+                    dest => dest.Direccion,
+                    opt => opt.MapFrom(src => src.Direccion)
+                )
+                .ForMember(
+                    dest => dest.GeneroId,
+                    opt => opt.MapFrom(src => src.GeneroId)
+                )
+                .ForMember(
+                    dest => dest.FechaCreacion,
+                    opt => opt.MapFrom(src => src.FechaCreacion)
+                )
+                .ForMember(
+                    dest => dest.FechaActualizacion,
+                    opt => opt.MapFrom(src => src.FechaActualizacion)
+                )
+                .ReverseMap();
 
             //Cuenta
-            CreateMap<Cuentum, CuentaDTO>()
+            CreateMap<Cuenta, CuentaDTO>()
                 .ForMember(
                     dest => dest.TipoCuentaId,
                     opt => opt.MapFrom(src => src.TipoCuentaId)
@@ -61,7 +81,16 @@ namespace Transacciones.Negocio.MappingEntities
                 .ForMember(
                     dest => dest.Saldo,
                     opt => opt.MapFrom(src => src.Saldo)
-                ).ReverseMap();
+                )
+                .ForMember(
+                    dest => dest.FechaCreacion,
+                    opt => opt.MapFrom(src => src.FechaCreacion)
+                )
+                .ForMember(
+                    dest => dest.FechaActualizacion,
+                    opt => opt.MapFrom(src => src.FechaActualizacion)
+                )
+                .ReverseMap();
 
             //Genero
             CreateMap<Genero, GeneroDTO>()
@@ -96,31 +125,6 @@ namespace Transacciones.Negocio.MappingEntities
                     dest => dest.FechaMovimiento,
                     opt => opt.MapFrom(src => src.FechaMovimiento)
                 ).ReverseMap();
-
-
-            //Persona
-            CreateMap<Persona, PersonaDTO>()
-                .ForMember(
-                    dest => dest.Identificacion,
-                    opt => opt.MapFrom(src => src.Identificacion)
-                )
-                .ForMember(
-                    dest => dest.Edad,
-                    opt => opt.MapFrom(src => src.Edad)
-                )
-                .ForMember(
-                    dest => dest.Telefono,
-                    opt => opt.MapFrom(src => src.Telefono)
-                )
-                .ForMember(
-                    dest => dest.Direccion,
-                    opt => opt.MapFrom(src => src.Direccion)
-                )
-                .ForMember(
-                    dest => dest.GeneroId,
-                    opt => opt.MapFrom(src => src.GeneroId)
-                ).ReverseMap();
-
             //Tipo cuenta
             CreateMap<TipoCuentum, TipoCuentaDTO>()
                 .ForMember(

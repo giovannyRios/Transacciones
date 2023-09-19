@@ -13,9 +13,6 @@ public partial class Genero
     [Column("ID")]
     public int Id { get; set; }
 
-    [StringLength(100)]
+    [StringLength(50)]
     public string? Valor { get; set; }
-
-    [InverseProperty("Genero")]
-    public virtual ICollection<Persona> Personas { get; set; } = new List<Persona>();
 }

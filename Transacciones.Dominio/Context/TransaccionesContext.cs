@@ -17,13 +17,11 @@ public partial class TransaccionesContext : DbContext
 
     public virtual DbSet<Cliente> Clientes { get; set; }
 
-    public virtual DbSet<Cuentum> Cuenta { get; set; }
+    public virtual DbSet<Cuenta> Cuentas { get; set; }
 
     public virtual DbSet<Genero> Generos { get; set; }
 
     public virtual DbSet<Movimiento> Movimientos { get; set; }
-
-    public virtual DbSet<Persona> Personas { get; set; }
 
     public virtual DbSet<TipoCuentum> TipoCuenta { get; set; }
 
@@ -32,25 +30,32 @@ public partial class TransaccionesContext : DbContext
         if (!optionsBuilder.IsConfigured)
         {
             optionsBuilder.UseSqlServer("Server=DESKTOP-CUUI3OV;Database=Transacciones;User Id=giovanny;Password=Giovanny;TrustServerCertificate=True");
-        }
-    
+        }    
     }
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Cliente>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Cliente__3214EC27FBA56C2D");
+            entity.HasKey(e => e.Id).HasName("PK__Clientes__3214EC2766C4AD0D");
 
-            entity.Property(e => e.Id).ValueGeneratedNever();
+            entity.HasIndex(e => e.FechaActualizacion, "IX_Fecha_Actuacion").HasFillFactor(80);
 
-            entity.HasOne(d => d.Persona).WithMany(p => p.Clientes).HasConstraintName("FK_PersonaId");
+            entity.HasIndex(e => e.FechaCreacion, "IX_Fecha_Creacion").HasFillFactor(80);
+
+            entity.HasIndex(e => e.Identificacion, "IX_Identificacion").HasFillFactor(80);
         });
 
-        modelBuilder.Entity<Cuentum>(entity =>
+        modelBuilder.Entity<Cuenta>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Cuenta__3214EC2750108263");
+            entity.HasKey(e => e.Id).HasName("PK__Cuentas__3214EC272CC59AF6");
 
-            entity.Property(e => e.Id).ValueGeneratedNever();
+            entity.HasIndex(e => e.ClienteId, "IX_Cliente_Id").HasFillFactor(80);
+
+            entity.HasIndex(e => e.FechaActualizacion, "IX_Fecha_Actualizacion_cuenta").HasFillFactor(80);
+
+            entity.HasIndex(e => e.FechaCreacion, "IX_Fecha_Creacion_cuenta").HasFillFactor(80);
+
+            entity.HasIndex(e => e.NumeroCuenta, "IX_NumeroCuenta").HasFillFactor(80);
 
             entity.HasOne(d => d.Cliente).WithMany(p => p.Cuenta).HasConstraintName("FK_ClienteId");
 
@@ -59,34 +64,21 @@ public partial class TransaccionesContext : DbContext
 
         modelBuilder.Entity<Genero>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Genero__3214EC27FFC3EDF1");
-
-            entity.Property(e => e.Id).ValueGeneratedNever();
+            entity.HasKey(e => e.Id).HasName("PK__Genero__3214EC27435F3042");
         });
 
         modelBuilder.Entity<Movimiento>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Movimien__3214EC279AF94B83");
+            entity.HasKey(e => e.Id).HasName("PK__Movimien__3214EC271F1A274F");
 
-            entity.Property(e => e.Id).ValueGeneratedNever();
+            entity.HasIndex(e => e.FechaMovimiento, "IX_FechaMovimiento").HasFillFactor(80);
 
             entity.HasOne(d => d.Cuenta).WithMany(p => p.Movimientos).HasConstraintName("FK_CuentaId");
         });
 
-        modelBuilder.Entity<Persona>(entity =>
-        {
-            entity.HasKey(e => e.Id).HasName("PK__Persona__3214EC27229BE9AC");
-
-            entity.Property(e => e.Id).ValueGeneratedNever();
-
-            entity.HasOne(d => d.Genero).WithMany(p => p.Personas).HasConstraintName("FK_Genero_Id");
-        });
-
         modelBuilder.Entity<TipoCuentum>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Tipo Cue__3214EC276D27343E");
-
-            entity.Property(e => e.Id).ValueGeneratedNever();
+            entity.HasKey(e => e.Id).HasName("PK__Tipo_Cue__3214EC274DD56CB7");
         });
 
         OnModelCreatingPartial(modelBuilder);

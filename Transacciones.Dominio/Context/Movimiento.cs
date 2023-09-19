@@ -21,10 +21,10 @@ public partial class Movimiento
     [Column(TypeName = "numeric(18, 2)")]
     public decimal? Saldo { get; set; }
 
-    [StringLength(500)]
+    [StringLength(200)]
     public string? DescripcionMovimiento { get; set; }
 
     [ForeignKey("CuentaId")]
     [InverseProperty("Movimientos")]
-    public virtual Cuentum? Cuenta { get; set; }
+    public virtual Cuenta? Cuenta { get; set; }
 }

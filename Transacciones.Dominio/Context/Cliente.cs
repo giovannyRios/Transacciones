@@ -6,29 +6,42 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Transacciones.Dominio.Context;
 
-[Table("Cliente")]
-[Index("ClienteId", Name = "Clave")]
-[Index("ClienteId", Name = "UQ_ClientId", IsUnique = true)]
+[Index("Contrasena", Name = "UQ_Contraseña", IsUnique = true)]
+[Index("Identificacion", Name = "UQ_Identificacion", IsUnique = true)]
 public partial class Cliente
 {
     [Key]
     [Column("ID")]
     public int Id { get; set; }
 
-    [StringLength(100)]
-    public string? ClienteId { get; set; }
+    [StringLength(300)]
+    public string? Nombre { get; set; }
+
+    [Column("Genero_Id")]
+    public int? GeneroId { get; set; }
+
+    public int? Edad { get; set; }
+
+    [StringLength(300)]
+    public string? Identificacion { get; set; }
+
+    [StringLength(500)]
+    public string? Direccion { get; set; }
+
+    [StringLength(15)]
+    public string? Telefono { get; set; }
 
     [StringLength(100)]
     public string? Contrasena { get; set; }
 
-    public int? PersonaId { get; set; }
-
     public bool? Estado { get; set; }
 
-    [InverseProperty("Cliente")]
-    public virtual ICollection<Cuentum> Cuenta { get; set; } = new List<Cuentum>();
+    [Column("Fecha_Creacion", TypeName = "date")]
+    public DateTime? FechaCreacion { get; set; }
 
-    [ForeignKey("PersonaId")]
-    [InverseProperty("Clientes")]
-    public virtual Persona? Persona { get; set; }
+    [Column("Fecha_Actualizacion", TypeName = "date")]
+    public DateTime? FechaActualizacion { get; set; }
+
+    [InverseProperty("Cliente")]
+    public virtual ICollection<Cuenta> Cuenta { get; set; } = new List<Cuenta>();
 }
