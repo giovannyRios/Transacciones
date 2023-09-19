@@ -1,0 +1,1591 @@
+{
+	"info": {
+		"_postman_id": "20dc53f6-7873-45e1-aa44-fa3f39bb3df7",
+		"name": "Transacciones Postman",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "13245804"
+	},
+	"item": [
+		{
+			"name": "api",
+			"item": [
+				{
+					"name": "Clientes",
+					"item": [
+						{
+							"name": "ObtenerClientes",
+							"item": [
+								{
+									"name": "/api/Clientes/ObtenerClientes",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/Clientes/ObtenerClientes",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Clientes",
+												"ObtenerClientes"
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "Success",
+											"originalRequest": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/api/Clientes/ObtenerClientes",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"Clientes",
+														"ObtenerClientes"
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "text",
+											"header": [],
+											"cookie": [],
+											"body": ""
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "AdicionarCliente",
+							"item": [
+								{
+									"name": "/api/Clientes/AdicionarCliente",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"nombre\": \"Jose Lema\",\n  \"generoId\": 1,\n  \"valorGenero\": \"string\",\n  \"edad\": 30,\n  \"identificacion\": \"1234\",\n  \"direccion\": \"Otavalo sn y principal\",\n  \"telefono\": \"3124578569\",\n  \"fechaActualizacion\": \"2023-09-18\",\n  \"fechaCreacion\": \"2023-09-18\",\n  \"estado\": true,\n  \"contrasena\": \"YQd\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/Clientes/AdicionarCliente",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Clientes",
+												"AdicionarCliente"
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "Success",
+											"originalRequest": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"direccion\": \"<string>\",\n  \"edad\": \"<integer>\",\n  \"estado\": \"<boolean>\",\n  \"fechaActualizacion\": \"<date>\",\n  \"fechaCreacion\": \"<date>\",\n  \"generoId\": 8972346537,\n  \"identificacion\": \"c\",\n  \"nombre\": \"Ló\",\n  \"telefono\": \"3788377408\",\n  \"id\": \"<integer>\",\n  \"valorGenero\": \"<string>\",\n  \"contrasena\": \"n7fX\"\n}",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/api/Clientes/AdicionarCliente",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"Clientes",
+														"AdicionarCliente"
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "text",
+											"header": [],
+											"cookie": [],
+											"body": ""
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "ActualizarCliente",
+							"item": [
+								{
+									"name": "/api/Clientes/ActualizarCliente",
+									"request": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"nombre\": \"Jose Lema\",\n  \"generoId\": 1,\n  \"valorGenero\": \"string\",\n  \"edad\": 31,\n  \"identificacion\": \"1234\",\n  \"direccion\": \"Otavalo sn y principal\",\n  \"telefono\": \"3124578569\",\n  \"fechaActualizacion\": \"2023-09-18\",\n  \"fechaCreacion\": \"2023-09-18\",\n  \"contrasena\":\"Prueba123**\",\n  \"estado\": true\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/Clientes/ActualizarCliente",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Clientes",
+												"ActualizarCliente"
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "Success",
+											"originalRequest": {
+												"method": "PUT",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"direccion\": \"<string>\",\n  \"edad\": \"<integer>\",\n  \"estado\": \"<boolean>\",\n  \"fechaActualizacion\": \"<date>\",\n  \"fechaCreacion\": \"<date>\",\n  \"generoId\": 8972346537,\n  \"identificacion\": \"c\",\n  \"nombre\": \"Ló\",\n  \"telefono\": \"3788377408\",\n  \"id\": \"<integer>\",\n  \"valorGenero\": \"<string>\",\n  \"contrasena\": \"n7fX\"\n}",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/api/Clientes/ActualizarCliente",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"Clientes",
+														"ActualizarCliente"
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "text",
+											"header": [],
+											"cookie": [],
+											"body": ""
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "EliminarCliente",
+							"item": [
+								{
+									"name": "/api/Clientes/EliminarCliente",
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/Clientes/EliminarCliente?numeroIdentificacion=<string>",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Clientes",
+												"EliminarCliente"
+											],
+											"query": [
+												{
+													"key": "numeroIdentificacion",
+													"value": "<string>"
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "Success",
+											"originalRequest": {
+												"method": "DELETE",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/api/Clientes/EliminarCliente?numeroIdentificacion=<string>",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"Clientes",
+														"EliminarCliente"
+													],
+													"query": [
+														{
+															"key": "numeroIdentificacion",
+															"value": "<string>"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "text",
+											"header": [],
+											"cookie": [],
+											"body": ""
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "ObtenerClientePorIdentificacion",
+							"item": [
+								{
+									"name": "/api/Clientes/ObtenerClientePorIdentificacion",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/Clientes/ObtenerClientePorIdentificacion?Identificacion=<string>",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Clientes",
+												"ObtenerClientePorIdentificacion"
+											],
+											"query": [
+												{
+													"key": "Identificacion",
+													"value": "<string>"
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "Success",
+											"originalRequest": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/api/Clientes/ObtenerClientePorIdentificacion?Identificacion=<string>",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"Clientes",
+														"ObtenerClientePorIdentificacion"
+													],
+													"query": [
+														{
+															"key": "Identificacion",
+															"value": "<string>"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "text",
+											"header": [],
+											"cookie": [],
+											"body": ""
+										}
+									]
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Cuentas",
+					"item": [
+						{
+							"name": "ObtenerCuentas",
+							"item": [
+								{
+									"name": "/api/Cuentas/ObtenerCuentas",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/Cuentas/ObtenerCuentas",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Cuentas",
+												"ObtenerCuentas"
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "Success",
+											"originalRequest": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/api/Cuentas/ObtenerCuentas",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"Cuentas",
+														"ObtenerCuentas"
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "text",
+											"header": [],
+											"cookie": [],
+											"body": ""
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "ObtenerCuentasPorClienteId",
+							"item": [
+								{
+									"name": "/api/Cuentas/ObtenerCuentasPorClienteId",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/Cuentas/ObtenerCuentasPorClienteId?ClienteId=<integer>",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Cuentas",
+												"ObtenerCuentasPorClienteId"
+											],
+											"query": [
+												{
+													"key": "ClienteId",
+													"value": "<integer>"
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "Success",
+											"originalRequest": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/api/Cuentas/ObtenerCuentasPorClienteId?ClienteId=<integer>",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"Cuentas",
+														"ObtenerCuentasPorClienteId"
+													],
+													"query": [
+														{
+															"key": "ClienteId",
+															"value": "<integer>"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "text",
+											"header": [],
+											"cookie": [],
+											"body": ""
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "ObtenerCuentasPorNumeroCuenta",
+							"item": [
+								{
+									"name": "/api/Cuentas/ObtenerCuentasPorNumeroCuenta",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/Cuentas/ObtenerCuentasPorNumeroCuenta?NumeroCuenta=<string>",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Cuentas",
+												"ObtenerCuentasPorNumeroCuenta"
+											],
+											"query": [
+												{
+													"key": "NumeroCuenta",
+													"value": "<string>"
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "Success",
+											"originalRequest": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/api/Cuentas/ObtenerCuentasPorNumeroCuenta?NumeroCuenta=<string>",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"Cuentas",
+														"ObtenerCuentasPorNumeroCuenta"
+													],
+													"query": [
+														{
+															"key": "NumeroCuenta",
+															"value": "<string>"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "text",
+											"header": [],
+											"cookie": [],
+											"body": ""
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "AdicionarCuenta",
+							"item": [
+								{
+									"name": "/api/Cuentas/AdicionarCuenta",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"clienteId\": 2,\n  \"estado\": true,\n  \"fechaActualizacion\": \"2023-09-19\",\n  \"fechaCreacion\": \"2023-09-19\",\n  \"numeroCuenta\": \"12345\",\n  \"saldo\": 2000,\n  \"tipoCuentaId\": 1\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/Cuentas/AdicionarCuenta",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Cuentas",
+												"AdicionarCuenta"
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "Success",
+											"originalRequest": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"clienteId\": \"<integer>\",\n  \"estado\": \"<boolean>\",\n  \"fechaActualizacion\": \"<date>\",\n  \"fechaCreacion\": \"<date>\",\n  \"numeroCuenta\": \"<string>\",\n  \"saldo\": \"<double>\",\n  \"tipoCuentaId\": \"<integer>\",\n  \"id\": \"<integer>\",\n  \"valorTipoCuenta\": \"<string>\"\n}",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/api/Cuentas/AdicionarCuenta",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"Cuentas",
+														"AdicionarCuenta"
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "text",
+											"header": [],
+											"cookie": [],
+											"body": ""
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "EliminarCuentaPorClienteId",
+							"item": [
+								{
+									"name": "/api/Cuentas/EliminarCuentaPorClienteId",
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/Cuentas/EliminarCuentaPorClienteId?ClienteId=<integer>",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Cuentas",
+												"EliminarCuentaPorClienteId"
+											],
+											"query": [
+												{
+													"key": "ClienteId",
+													"value": "<integer>"
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "Success",
+											"originalRequest": {
+												"method": "DELETE",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/api/Cuentas/EliminarCuentaPorClienteId?ClienteId=<integer>",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"Cuentas",
+														"EliminarCuentaPorClienteId"
+													],
+													"query": [
+														{
+															"key": "ClienteId",
+															"value": "<integer>"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "text",
+											"header": [],
+											"cookie": [],
+											"body": ""
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "EliminarCuenta",
+							"item": [
+								{
+									"name": "/api/Cuentas/EliminarCuenta",
+									"request": {
+										"method": "DELETE",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"clienteId\": \"<integer>\",\n  \"estado\": \"<boolean>\",\n  \"fechaActualizacion\": \"<date>\",\n  \"fechaCreacion\": \"<date>\",\n  \"numeroCuenta\": \"<string>\",\n  \"saldo\": \"<double>\",\n  \"tipoCuentaId\": \"<integer>\",\n  \"id\": \"<integer>\",\n  \"valorTipoCuenta\": \"<string>\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/Cuentas/EliminarCuenta",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Cuentas",
+												"EliminarCuenta"
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "Success",
+											"originalRequest": {
+												"method": "DELETE",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"clienteId\": \"<integer>\",\n  \"estado\": \"<boolean>\",\n  \"fechaActualizacion\": \"<date>\",\n  \"fechaCreacion\": \"<date>\",\n  \"numeroCuenta\": \"<string>\",\n  \"saldo\": \"<double>\",\n  \"tipoCuentaId\": \"<integer>\",\n  \"id\": \"<integer>\",\n  \"valorTipoCuenta\": \"<string>\"\n}",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/api/Cuentas/EliminarCuenta",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"Cuentas",
+														"EliminarCuenta"
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "text",
+											"header": [],
+											"cookie": [],
+											"body": ""
+										}
+									]
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Generos",
+					"item": [
+						{
+							"name": "ObtenerGeneroPorId",
+							"item": [
+								{
+									"name": "/api/Generos/ObtenerGeneroPorId",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/Generos/ObtenerGeneroPorId?Id=<integer>",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Generos",
+												"ObtenerGeneroPorId"
+											],
+											"query": [
+												{
+													"key": "Id",
+													"value": "<integer>"
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "Success",
+											"originalRequest": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/api/Generos/ObtenerGeneroPorId?Id=<integer>",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"Generos",
+														"ObtenerGeneroPorId"
+													],
+													"query": [
+														{
+															"key": "Id",
+															"value": "<integer>"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "text",
+											"header": [],
+											"cookie": [],
+											"body": ""
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "ObtenerGeneroPorValor",
+							"item": [
+								{
+									"name": "/api/Generos/ObtenerGeneroPorValor",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/Generos/ObtenerGeneroPorValor?valor=<string>",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Generos",
+												"ObtenerGeneroPorValor"
+											],
+											"query": [
+												{
+													"key": "valor",
+													"value": "<string>"
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "Success",
+											"originalRequest": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/api/Generos/ObtenerGeneroPorValor?valor=<string>",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"Generos",
+														"ObtenerGeneroPorValor"
+													],
+													"query": [
+														{
+															"key": "valor",
+															"value": "<string>"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "text",
+											"header": [],
+											"cookie": [],
+											"body": ""
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "ObtenerGeneros",
+							"item": [
+								{
+									"name": "/api/Generos/ObtenerGeneros",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/Generos/ObtenerGeneros",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Generos",
+												"ObtenerGeneros"
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "Success",
+											"originalRequest": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/api/Generos/ObtenerGeneros",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"Generos",
+														"ObtenerGeneros"
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "text",
+											"header": [],
+											"cookie": [],
+											"body": ""
+										}
+									]
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Movimientos",
+					"item": [
+						{
+							"name": "ObtenerMovimientos",
+							"item": [
+								{
+									"name": "/api/Movimientos/ObtenerMovimientos",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/Movimientos/ObtenerMovimientos",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Movimientos",
+												"ObtenerMovimientos"
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "Success",
+											"originalRequest": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/api/Movimientos/ObtenerMovimientos",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"Movimientos",
+														"ObtenerMovimientos"
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "text",
+											"header": [],
+											"cookie": [],
+											"body": ""
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "ObtenerMovimientosPorCuentaId",
+							"item": [
+								{
+									"name": "/api/Movimientos/ObtenerMovimientosPorCuentaId",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/Movimientos/ObtenerMovimientosPorCuentaId?CuentaId=<integer>",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Movimientos",
+												"ObtenerMovimientosPorCuentaId"
+											],
+											"query": [
+												{
+													"key": "CuentaId",
+													"value": "<integer>"
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "Success",
+											"originalRequest": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/api/Movimientos/ObtenerMovimientosPorCuentaId?CuentaId=<integer>",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"Movimientos",
+														"ObtenerMovimientosPorCuentaId"
+													],
+													"query": [
+														{
+															"key": "CuentaId",
+															"value": "<integer>"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "text",
+											"header": [],
+											"cookie": [],
+											"body": ""
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "ObtenerMovimientosPorId",
+							"item": [
+								{
+									"name": "/api/Movimientos/ObtenerMovimientosPorId",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/Movimientos/ObtenerMovimientosPorId?Id=<integer>",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Movimientos",
+												"ObtenerMovimientosPorId"
+											],
+											"query": [
+												{
+													"key": "Id",
+													"value": "<integer>"
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "Success",
+											"originalRequest": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/api/Movimientos/ObtenerMovimientosPorId?Id=<integer>",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"Movimientos",
+														"ObtenerMovimientosPorId"
+													],
+													"query": [
+														{
+															"key": "Id",
+															"value": "<integer>"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "text",
+											"header": [],
+											"cookie": [],
+											"body": ""
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "AdicionarMovimiento",
+							"item": [
+								{
+									"name": "/api/Movimientos/AdicionarMovimiento",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"cuentaId\": 7257,\n  \"descripcionMovimiento\": \"<string>\",\n  \"fechaMovimiento\": \"<date>\",\n  \"saldo\": \"<double>\",\n  \"id\": \"<integer>\",\n  \"numeroDeCuenta\": \"<string>\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/Movimientos/AdicionarMovimiento",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Movimientos",
+												"AdicionarMovimiento"
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "Success",
+											"originalRequest": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"cuentaId\": 7257,\n  \"descripcionMovimiento\": \"<string>\",\n  \"fechaMovimiento\": \"<date>\",\n  \"saldo\": \"<double>\",\n  \"id\": \"<integer>\",\n  \"numeroDeCuenta\": \"<string>\"\n}",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/api/Movimientos/AdicionarMovimiento",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"Movimientos",
+														"AdicionarMovimiento"
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "text",
+											"header": [],
+											"cookie": [],
+											"body": ""
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "EliminarMovimientosPorCuentaId",
+							"item": [
+								{
+									"name": "/api/Movimientos/EliminarMovimientosPorCuentaId",
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/Movimientos/EliminarMovimientosPorCuentaId?CuentaId=<integer>",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Movimientos",
+												"EliminarMovimientosPorCuentaId"
+											],
+											"query": [
+												{
+													"key": "CuentaId",
+													"value": "<integer>"
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "Success",
+											"originalRequest": {
+												"method": "DELETE",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/api/Movimientos/EliminarMovimientosPorCuentaId?CuentaId=<integer>",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"Movimientos",
+														"EliminarMovimientosPorCuentaId"
+													],
+													"query": [
+														{
+															"key": "CuentaId",
+															"value": "<integer>"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "text",
+											"header": [],
+											"cookie": [],
+											"body": ""
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "EliminarMovimiento",
+							"item": [
+								{
+									"name": "/api/Movimientos/EliminarMovimiento",
+									"request": {
+										"method": "DELETE",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"cuentaId\": 7257,\n  \"descripcionMovimiento\": \"<string>\",\n  \"fechaMovimiento\": \"<date>\",\n  \"saldo\": \"<double>\",\n  \"id\": \"<integer>\",\n  \"numeroDeCuenta\": \"<string>\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/Movimientos/EliminarMovimiento",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Movimientos",
+												"EliminarMovimiento"
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "Success",
+											"originalRequest": {
+												"method": "DELETE",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"cuentaId\": 7257,\n  \"descripcionMovimiento\": \"<string>\",\n  \"fechaMovimiento\": \"<date>\",\n  \"saldo\": \"<double>\",\n  \"id\": \"<integer>\",\n  \"numeroDeCuenta\": \"<string>\"\n}",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/api/Movimientos/EliminarMovimiento",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"Movimientos",
+														"EliminarMovimiento"
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "text",
+											"header": [],
+											"cookie": [],
+											"body": ""
+										}
+									]
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Reportes",
+					"item": [
+						{
+							"name": "Get",
+							"item": [
+								{
+									"name": "/api/Reportes/Get",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/Reportes/Get?FechaInicio=<date>&FechaFIn=<date>",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Reportes",
+												"Get"
+											],
+											"query": [
+												{
+													"key": "FechaInicio",
+													"value": "<date>"
+												},
+												{
+													"key": "FechaFIn",
+													"value": "<date>"
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "Success",
+											"originalRequest": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/api/Reportes/Get?FechaInicio=<date>&FechaFIn=<date>",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"Reportes",
+														"Get"
+													],
+													"query": [
+														{
+															"key": "FechaInicio",
+															"value": "<date>"
+														},
+														{
+															"key": "FechaFIn",
+															"value": "<date>"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "text",
+											"header": [],
+											"cookie": [],
+											"body": ""
+										}
+									]
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "TipoCuentas",
+					"item": [
+						{
+							"name": "ObtenerTipoCuentaPorId",
+							"item": [
+								{
+									"name": "/api/TipoCuentas/ObtenerTipoCuentaPorId",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/TipoCuentas/ObtenerTipoCuentaPorId?Id=<integer>",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"TipoCuentas",
+												"ObtenerTipoCuentaPorId"
+											],
+											"query": [
+												{
+													"key": "Id",
+													"value": "<integer>"
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "Success",
+											"originalRequest": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/api/TipoCuentas/ObtenerTipoCuentaPorId?Id=<integer>",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"TipoCuentas",
+														"ObtenerTipoCuentaPorId"
+													],
+													"query": [
+														{
+															"key": "Id",
+															"value": "<integer>"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "text",
+											"header": [],
+											"cookie": [],
+											"body": ""
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "ObtenerTipoCuentaPorValor",
+							"item": [
+								{
+									"name": "/api/TipoCuentas/ObtenerTipoCuentaPorValor",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/TipoCuentas/ObtenerTipoCuentaPorValor?Valor=<string>",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"TipoCuentas",
+												"ObtenerTipoCuentaPorValor"
+											],
+											"query": [
+												{
+													"key": "Valor",
+													"value": "<string>"
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "Success",
+											"originalRequest": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/api/TipoCuentas/ObtenerTipoCuentaPorValor?Valor=<string>",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"TipoCuentas",
+														"ObtenerTipoCuentaPorValor"
+													],
+													"query": [
+														{
+															"key": "Valor",
+															"value": "<string>"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "text",
+											"header": [],
+											"cookie": [],
+											"body": ""
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "ObtenerTipoCuentas",
+							"item": [
+								{
+									"name": "/api/TipoCuentas/ObtenerTipoCuentas",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/TipoCuentas/ObtenerTipoCuentas",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"TipoCuentas",
+												"ObtenerTipoCuentas"
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "Success",
+											"originalRequest": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/api/TipoCuentas/ObtenerTipoCuentas",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"TipoCuentas",
+														"ObtenerTipoCuentas"
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "text",
+											"header": [],
+											"cookie": [],
+											"body": ""
+										}
+									]
+								}
+							]
+						}
+					]
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "https://localhost:7213"
+		}
+	]
+}
