@@ -29,7 +29,7 @@ public partial class TransaccionesContext : DbContext
     {
         if (!optionsBuilder.IsConfigured)
         {
-            optionsBuilder.UseSqlServer("Server=DESKTOP-CUUI3OV;Database=Transacciones;User Id=giovanny;Password=Giovanny;TrustServerCertificate=True");
+            optionsBuilder.UseSqlServer("Server=sql-server-container,14330;Database=Transacciones;User Id=sa;Password=Ced1033720903");
         }    
     }
     protected override void OnModelCreating(ModelBuilder modelBuilder)
