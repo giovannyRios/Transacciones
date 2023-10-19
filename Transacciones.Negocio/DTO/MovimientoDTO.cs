@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace Transacciones.Negocio.DTO
 {
-    public class MovimientoDTO:ICloneable
+    public class MovimientoDTO : ICloneable
     {
         public int Id { get; set; }
 
@@ -24,7 +18,7 @@ namespace Transacciones.Negocio.DTO
         [Required(ErrorMessage = "El campo Saldo es requerido")]
         public decimal? Saldo { get; set; }
 
-        public string? NumeroDeCuenta { get; set; }  
+        public string? NumeroDeCuenta { get; set; }
 
         [StringLength(500, ErrorMessage = "La descripción del movimiento no puede superar los 500 caracteres")]
 

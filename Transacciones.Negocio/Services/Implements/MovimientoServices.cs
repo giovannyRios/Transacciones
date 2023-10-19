@@ -1,11 +1,5 @@
 ﻿using AutoMapper;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Transacciones.Dominio.Context;
-using Transacciones.Dominio.Repository.Implements;
 using Transacciones.Dominio.Repository.Interfaces;
 using Transacciones.Negocio.DTO;
 using Transacciones.Negocio.Services.Interfaces;
@@ -100,7 +94,7 @@ namespace Transacciones.Negocio.Services.Implements
             MovimientoDTO movimientoDTO = null;
             Movimiento movimiento = await _MovimientoRepository.ObtenerMovimientosPorId(Id);
             if (movimiento != null && movimiento.CuentaId != null)
-                movimientoDTO =  _mapper.Map<MovimientoDTO>(movimiento);
+                movimientoDTO = _mapper.Map<MovimientoDTO>(movimiento);
             return movimientoDTO;
         }
     }

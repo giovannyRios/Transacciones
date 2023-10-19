@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Transacciones.Dominio", "Tr
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Transacciones.Negocio", "Transacciones.Negocio\Transacciones.Negocio.csproj", "{3223A4BA-5B34-4BE2-9B21-55DD52CAB487}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestCliente", "TestCliente\TestCliente.csproj", "{485F01D3-ADB6-45C3-8073-0B31F0BBA23D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestCliente", "TestCliente\TestCliente.csproj", "{485F01D3-ADB6-45C3-8073-0B31F0BBA23D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Transacciones.Dominio.IoCRegister", "Transacciones.Dominio.IoCRegister\Transacciones.Dominio.IoCRegister.csproj", "{9DEE5273-AF7C-4BF6-A863-8D45F8F00349}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{485F01D3-ADB6-45C3-8073-0B31F0BBA23D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{485F01D3-ADB6-45C3-8073-0B31F0BBA23D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{485F01D3-ADB6-45C3-8073-0B31F0BBA23D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9DEE5273-AF7C-4BF6-A863-8D45F8F00349}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9DEE5273-AF7C-4BF6-A863-8D45F8F00349}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9DEE5273-AF7C-4BF6-A863-8D45F8F00349}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9DEE5273-AF7C-4BF6-A863-8D45F8F00349}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

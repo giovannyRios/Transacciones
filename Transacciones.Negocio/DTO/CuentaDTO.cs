@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace Transacciones.Negocio.DTO
 {
-    public class CuentaDTO:ICloneable
+    public class CuentaDTO : ICloneable
     {
         public int Id { get; set; }
 
@@ -17,10 +11,10 @@ namespace Transacciones.Negocio.DTO
         public string? NumeroCuenta { get; set; }
 
         [Required(ErrorMessage = "El campo TipoCuentaId es requerido")]
-        [Range(1,2,ErrorMessage = "El campo TipoCuentaId debe ser mayor a 0 y menor o igual a 2")]
+        [Range(1, 2, ErrorMessage = "El campo TipoCuentaId debe ser mayor a 0 y menor o igual a 2")]
         public int? TipoCuentaId { get; set; }
 
-        public string? ValorTipoCuenta { get; set; } 
+        public string? ValorTipoCuenta { get; set; }
 
         [Required(ErrorMessage = "El campo ClienteId es requerido")]
         [Range(1, int.MaxValue, ErrorMessage = "El campo ClienteId debe ser mayor a 0")]

@@ -1,17 +1,12 @@
 ﻿using AutoMapper;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Transacciones.Dominio.Context;
 using Transacciones.Negocio.DTO;
 
 namespace Transacciones.Negocio.MappingEntities
 {
-    public class MappingProfile:Profile
+    public class MappingProfile : Profile
     {
-        public MappingProfile() 
+        public MappingProfile()
         {
             //Cliente
             CreateMap<Cliente, ClienteDTO>()

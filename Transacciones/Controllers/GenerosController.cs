@@ -1,10 +1,13 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System.Runtime.CompilerServices;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Transacciones.Filters;
 using Transacciones.Negocio.DTO;
 using Transacciones.Negocio.Services.Interfaces;
 
 namespace Transacciones.Controllers
 {
+    [Authorize]
+    [ServiceFilter(typeof(ValidateJWTFilter))]
     [ApiController]
     [Route("api/[Controller]")]
     public class GenerosController : ControllerBase
@@ -23,7 +26,7 @@ namespace Transacciones.Controllers
             try
             {
                 GeneroDTO resultado = await _generoServices.ObtenerGeneroPorId(Id);
-                if(resultado != null)
+                if (resultado != null)
                     return Ok(resultado);
                 return BadRequest("Genero no encontrado");
 

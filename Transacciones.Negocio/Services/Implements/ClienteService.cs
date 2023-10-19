@@ -1,10 +1,6 @@
 ﻿using AutoMapper;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Transacciones.Dominio.Context;
+using Transacciones.Dominio.Decorators.ClienteDecorator;
 using Transacciones.Dominio.Repository.Interfaces;
 using Transacciones.Negocio.DTO;
 using Transacciones.Negocio.Services.Interfaces;
@@ -14,12 +10,14 @@ namespace Transacciones.Negocio.Services.Implements
     public class ClienteService : IClienteService
     {
         private readonly IclienteRepository _clienteRepository;
+        private readonly IclienteDecorator _clienteDecorator;
         private readonly IMapper _mapper;
 
-        public ClienteService(IclienteRepository ClienteRepository, IMapper mapper)
+        public ClienteService(IclienteRepository ClienteRepository, IMapper mapper, IclienteDecorator clienteDecorator)
         {
             _clienteRepository = ClienteRepository;
             _mapper = mapper;
+            _clienteDecorator = clienteDecorator;
         }
         public async Task<bool> ActualizarCliente(ClienteDTO clienteDTO)
         {
@@ -64,7 +62,7 @@ namespace Transacciones.Negocio.Services.Implements
 
         public async Task<ClienteDTO> ObtenerClientePorId(int Id)
         {
-            Cliente Cliente = await _clienteRepository.ObtenerClientePorId(Id);
+            Cliente Cliente = await _clienteDecorator.ObtenerClientePorId(Id);
             ClienteDTO clienteDTO = new ClienteDTO();
             if (Cliente != null)
             {
@@ -76,7 +74,7 @@ namespace Transacciones.Negocio.Services.Implements
 
         public async Task<ClienteDTO> ObtenerClientePorNumeroIdentificacion(string numeroIdentificacion)
         {
-            Cliente cliente = await _clienteRepository.ObtenerClientePorIdentificacion(numeroIdentificacion);
+            Cliente cliente = await _clienteDecorator.ObtenerClientePorIdentificacion(numeroIdentificacion);
             ClienteDTO clienteDTO = new ClienteDTO();
             if (cliente != null)
             {

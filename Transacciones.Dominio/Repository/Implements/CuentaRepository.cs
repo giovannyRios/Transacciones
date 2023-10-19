@@ -1,9 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Transacciones.Dominio.Context;
 using Transacciones.Dominio.Repository.Interfaces;
 
@@ -74,19 +69,19 @@ namespace Transacciones.Dominio.Repository.Implements
 
         public async Task<List<Cuenta>> ObtenerCuentasPorClienteId(int ClienteId)
         {
-    
-                List<Cuenta> cuentas = new List<Cuenta>();
-                cuentas = await _context.Cuentas.Where(cuenta => cuenta.ClienteId == ClienteId).ToListAsync();
 
-                if (cuentas != null && cuentas.Count > 0)
-                {
-                    return cuentas;
-                }
-                else
-                {
-                    return null;
-                }
-            
+            List<Cuenta> cuentas = new List<Cuenta>();
+            cuentas = await _context.Cuentas.Where(cuenta => cuenta.ClienteId == ClienteId).ToListAsync();
+
+            if (cuentas != null && cuentas.Count > 0)
+            {
+                return cuentas;
+            }
+            else
+            {
+                return null;
+            }
+
         }
     }
 }

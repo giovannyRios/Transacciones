@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Transacciones.Dominio.Context;
-using Transacciones.Negocio.DTO;
+﻿using Transacciones.Negocio.DTO;
 
 namespace Transacciones.Negocio.Services.Interfaces
 {

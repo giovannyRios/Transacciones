@@ -1,17 +1,21 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Transacciones.Filters;
 using Transacciones.Negocio.DTO;
 using Transacciones.Negocio.Services.Interfaces;
 
 namespace Transacciones.Controllers
 {
+    [Authorize]
+    [ServiceFilter(typeof(ValidateJWTFilter))]
     [ApiController]
     [Route("api/[Controller]")]
     public class ClientesController : ControllerBase
     {
         private readonly IClienteService _clienteService;
         private readonly IGeneroService _generoService;
-        public ClientesController(IClienteService clienteService, IGeneroService genero) 
-        { 
+        public ClientesController(IClienteService clienteService, IGeneroService genero)
+        {
             _clienteService = clienteService;
             _generoService = genero;
         }
@@ -20,8 +24,8 @@ namespace Transacciones.Controllers
         [Route("ObtenerClientes")]
         public async Task<IActionResult> ObtenerClientes()
         {
-            try 
-            { 
+            try
+            {
                 List<ClienteDTO> consulta = await _clienteService.obtenerClientes();
                 List<ClienteDTO> resultado = new List<ClienteDTO>();
                 foreach (ClienteDTO Cliente in consulta)
@@ -30,10 +34,11 @@ namespace Transacciones.Controllers
                     var genero = await _generoService.ObtenerGeneroPorId(Cliente.GeneroId ?? 0);
                     Cliente.ValorGenero = genero != null ? genero.Valor : "Sin genero";
                     resultado.Add(Cliente);
-                }   
+                }
                 return Ok(resultado);
-            
-            }catch (Exception ex) 
+
+            }
+            catch (Exception ex)
             {
                 return Problem($"Ha ocurrido un error al momento de consultar las Clientes, verifique: {ex.InnerException.Message}");
             }
@@ -53,7 +58,7 @@ namespace Transacciones.Controllers
                 {
                     return BadRequest(ModelState);
                 }
-    
+
                 //Se adiciona la Cliente
                 ClienteDTO ClienteDTO2 = ClienteDTO.Clone() as ClienteDTO;
                 resultado = await _clienteService.AdicionarCliente(ClienteDTO2);
@@ -83,7 +88,7 @@ namespace Transacciones.Controllers
                 }
 
                 ClienteDTO Cliente = await _clienteService.ObtenerClientePorNumeroIdentificacion(ClienteDTO.Identificacion);
-                
+
                 if (Cliente == null)
                     return BadRequest($"La Cliente enviada con los siguientes datos: {ClienteDTO.ToString()} no existe en el sistema");
 

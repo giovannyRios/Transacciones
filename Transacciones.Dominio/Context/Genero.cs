@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Transacciones.Dominio.Context;
+﻿namespace Transacciones.Dominio.Context;
 
 public partial class Genero
 {

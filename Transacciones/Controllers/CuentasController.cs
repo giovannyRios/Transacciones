@@ -1,11 +1,13 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
-using Transacciones.Dominio.Context;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Transacciones.Filters;
 using Transacciones.Negocio.DTO;
 using Transacciones.Negocio.Services.Interfaces;
 
 namespace Transacciones.Controllers
 {
+    [Authorize]
+    [ServiceFilter(typeof(ValidateJWTFilter))]
     [ApiController]
     [Route("api/[Controller]")]
     public class CuentasController : ControllerBase
@@ -122,7 +124,7 @@ namespace Transacciones.Controllers
                     return BadRequest($"La cuenta {cuenta.NumeroCuenta} debe estar asociada a un cliente que exista, recuerde el campo ClienteId");
 
                 CuentaDTO cuentaClonado = cuenta.Clone() as CuentaDTO;
-                
+
                 resultado = await _cuentaService.AdicionarCuenta(cuentaClonado);
 
                 if (resultado)

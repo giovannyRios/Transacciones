@@ -1,11 +1,13 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Transacciones.Dominio.Context;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Transacciones.Filters;
 using Transacciones.Negocio.DTO;
-using Transacciones.Negocio.Services.Implements;
 using Transacciones.Negocio.Services.Interfaces;
 
 namespace Transacciones.Controllers
 {
+    [Authorize]
+    [ServiceFilter(typeof(ValidateJWTFilter))]
     [ApiController]
     [Route("api/[Controller]")]
     public class MovimientosController : ControllerBase

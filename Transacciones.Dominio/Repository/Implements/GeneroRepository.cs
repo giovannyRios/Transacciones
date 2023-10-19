@@ -1,10 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using Transacciones.Dominio.Context;
 using Transacciones.Dominio.Repository.Interfaces;
 
@@ -53,7 +47,7 @@ namespace Transacciones.Dominio.Repository.Implements
         }
 
         public bool RemoverGenero(Genero genero)
-        { 
+        {
             _context.Generos.Remove(genero);
             return _context.SaveChanges() > 0;
 

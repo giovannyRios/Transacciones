@@ -1,11 +1,5 @@
 ﻿using AutoMapper;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Transacciones.Dominio.Context;
-using Transacciones.Dominio.Repository.Implements;
 using Transacciones.Dominio.Repository.Interfaces;
 using Transacciones.Negocio.DTO;
 using Transacciones.Negocio.Services.Interfaces;
@@ -18,13 +12,13 @@ namespace Transacciones.Negocio.Services.Implements
         private readonly IMapper _mapper;
         public TipoCuentaService(ITipoCuentaRepository tipoCuentaRepository, IMapper mapper)
         {
-            _tipoCuentaRepository = tipoCuentaRepository;   
+            _tipoCuentaRepository = tipoCuentaRepository;
             _mapper = mapper;
         }
         public async Task<TipoCuentaDTO> ObtenerTipoCuentaPorId(int Id)
         {
             TipoCuentum tipoCuentum = await _tipoCuentaRepository.ObtenerTipoCuentaPorId(Id);
-            if(tipoCuentum != null)
+            if (tipoCuentum != null)
                 return _mapper.Map<TipoCuentaDTO>(tipoCuentum);
             return null;
 

@@ -1,9 +1,9 @@
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using System.Runtime.CompilerServices;
+using Microsoft.Extensions.Caching.Memory;
 using Transacciones.Controllers;
 using Transacciones.Dominio.Context;
+using Transacciones.Dominio.Decorators.ClienteDecorator;
 using Transacciones.Dominio.Repository.Implements;
 using Transacciones.Dominio.Repository.Interfaces;
 using Transacciones.Negocio.DTO;
@@ -20,17 +20,19 @@ namespace TestCliente
         private readonly IGeneroService _generoService;
         private readonly IclienteRepository _clienteRepository;
         private readonly IGeneroRepository _generoRepository;
+        private readonly IMemoryCache _memoryCache;
         private readonly IMapper _mapper;
         private readonly TransaccionesContext _context;
         private readonly MapperConfig _mapperConfig;
-        public ClienteTest() 
+        private readonly IclienteDecorator _clienteDecorator;
+        public ClienteTest()
         {
             _context = new TransaccionesContext();
             _mapperConfig = new MapperConfig();
-            _clienteRepository = new ClienteRepository(_context);
+            _clienteDecorator = new ClienteDecorator(_clienteRepository, _memoryCache);
             _generoRepository = new GeneroRepository(_context);
-            _clienteService = new ClienteService(_clienteRepository, _mapperConfig.getMappper());
-            _generoService =  new GenerosServices(_generoRepository, _mapperConfig.getMappper());
+            _clienteService = new ClienteService(_clienteRepository, _mapperConfig.getMappper(), _clienteDecorator);
+            _generoService = new GenerosServices(_generoRepository, _mapperConfig.getMappper());
             _clientesController = new ClientesController(_clienteService, _generoService);
         }
 
@@ -79,7 +81,7 @@ namespace TestCliente
             {
                 Assert.True(false, "No llego un OkObjectResult, esto quiere decir que hay un posible error en el controlador de Clientes");
             }
-                      
+
         }
 
         [Fact]
@@ -160,7 +162,7 @@ namespace TestCliente
                 var result = await _clientesController.EliminarCliente("1234567");
                 Assert.IsType<OkObjectResult>(result);
             }
-            
+
         }
 
         [Fact]

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Transacciones.Dominio.Context;
+﻿using Transacciones.Dominio.Context;
 
 namespace Transacciones.Dominio.Repository.Interfaces
 {

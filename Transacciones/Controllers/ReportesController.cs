@@ -1,9 +1,13 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Transacciones.Filters;
 using Transacciones.Negocio.DTO;
 using Transacciones.Negocio.Services.Interfaces;
 
 namespace Transacciones.Controllers
 {
+    [Authorize]
+    [ServiceFilter(typeof(ValidateJWTFilter))]
     [ApiController]
     [Route("api/[Controller]")]
     public class ReportesController : ControllerBase
@@ -22,7 +26,7 @@ namespace Transacciones.Controllers
 
         [HttpGet]
         [Route("Get")]
-        public async Task<IActionResult> Get([FromQuery]RangoFechas rangoFechas)
+        public async Task<IActionResult> Get([FromQuery] RangoFechas rangoFechas)
         {
             try
             {
@@ -32,7 +36,7 @@ namespace Transacciones.Controllers
                 {
                     return BadRequest("Debe ingresar el rango de fechas para generar la información");
                 }
-                else if(rangoFechas.FechaInicio > rangoFechas.FechaFIn)
+                else if (rangoFechas.FechaInicio > rangoFechas.FechaFIn)
                 {
                     return BadRequest("La fecha inicial no puede ser superior a la fecha final");
                 }
@@ -41,7 +45,7 @@ namespace Transacciones.Controllers
                     var listaMovimientos = await _movimientoServices.ObtenerMovimientos();
                     var listaCuentas = await _cuentaService.ObtenerCuentas();
                     var ListaClientes = await _clienteService.obtenerClientes();
-                    
+
 
                     var ListaMovimientosFiltrada = listaMovimientos.Where(movimiento => movimiento.FechaMovimiento >= rangoFechas.FechaInicio && movimiento.FechaMovimiento <= rangoFechas.FechaFIn).ToList();
                     if (ListaMovimientosFiltrada != null)
@@ -62,7 +66,7 @@ namespace Transacciones.Controllers
                             reporteDTO.Estado = (bool)cuenta.Estado;
 
                             var cliente = ListaClientes.Where(cliente => cliente.Id == cuenta.ClienteId).FirstOrDefault();
-                           
+
 
                             reporteDTO.Cliente = cliente.Nombre;
 
@@ -80,7 +84,7 @@ namespace Transacciones.Controllers
                     }
                 }
 
-               
+
                 return Ok();
             }
             catch (Exception ex)

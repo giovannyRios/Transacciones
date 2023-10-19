@@ -1,16 +1,20 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Transacciones.Filters;
 using Transacciones.Negocio.DTO;
 using Transacciones.Negocio.Services.Interfaces;
 
 namespace Transacciones.Controllers
 {
+    [Authorize]
+    [ServiceFilter(typeof(ValidateJWTFilter))]
     [ApiController]
     [Route("api/[Controller]")]
     public class TipoCuentasController : ControllerBase
     {
         private readonly ITipoCuentaService _TipoCuentaService;
-        public TipoCuentasController(ITipoCuentaService tipoCuentaService) 
-        { 
+        public TipoCuentasController(ITipoCuentaService tipoCuentaService)
+        {
             _TipoCuentaService = tipoCuentaService;
         }
 
@@ -21,12 +25,12 @@ namespace Transacciones.Controllers
             try
             {
                 TipoCuentaDTO resultado = await _TipoCuentaService.ObtenerTipoCuentaPorId(Id);
-                if(resultado != null)
+                if (resultado != null)
                     return Ok(resultado);
                 return BadRequest("Tipo cuenta no encontrada");
 
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 return Problem($"Ha ocurrido un error al momento de obtener el tipo de cuenta por Id, verifique: {ex.InnerException.Message}");
             }

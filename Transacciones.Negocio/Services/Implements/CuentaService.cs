@@ -1,11 +1,5 @@
 ﻿using AutoMapper;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Transacciones.Dominio.Context;
-using Transacciones.Dominio.Repository.Implements;
 using Transacciones.Dominio.Repository.Interfaces;
 using Transacciones.Negocio.DTO;
 using Transacciones.Negocio.Services.Interfaces;
@@ -16,7 +10,7 @@ namespace Transacciones.Negocio.Services.Implements
     {
         private readonly IcuentaRepository _cuentaRepository;
         private readonly IMapper _mapper;
-        public CuentaService(IcuentaRepository icuentaRepository,IMapper mapper) 
+        public CuentaService(IcuentaRepository icuentaRepository, IMapper mapper)
         {
             _cuentaRepository = icuentaRepository;
             _mapper = mapper;
@@ -70,10 +64,10 @@ namespace Transacciones.Negocio.Services.Implements
                 foreach (var cliente in clienteDto)
                 {
                     resultado = await _cuentaRepository.EliminarCuenta(cliente);
-                    if(resultado)
+                    if (resultado)
                         conteoResultado++;
                 }
-                
+
             }
 
             return conteoResultado > 0;
