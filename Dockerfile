@@ -5,7 +5,8 @@ EXPOSE 5097 7213 80 443 57605
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
 COPY ["Transacciones/Transacciones.csproj", "Transacciones/"]
-COPY ["Transacciones.Dominio/Transacciones.Dominio.csproj", "Transacciones.Dominio/"]
+COPY ["Transacciones.Dominio.IoCRegister/Transacciones.Dominio.IoCRegister.csproj", "Transacciones.Dominio.IoCRegister/"]
+# COPY ["Transacciones.Dominio/Transacciones.Dominio.csproj", "Transacciones.Dominio/"]
 COPY ["Transacciones.Negocio/Transacciones.Negocio.csproj", "Transacciones.Negocio/"]
 RUN dotnet restore "Transacciones/Transacciones.csproj"
 COPY . .
