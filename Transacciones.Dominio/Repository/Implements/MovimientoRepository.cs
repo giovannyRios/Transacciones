@@ -58,19 +58,11 @@ namespace Transacciones.Dominio.Repository.Implements
             return await _context.Movimientos.OrderByDescending(p => p.Id).ToListAsync();
         }
 
-        public async Task<List<Movimiento>> ObtenerMovimientosPorCuentaId(int CuentaId)
+        public async Task<List<Movimiento?>> ObtenerMovimientosPorCuentaId(int CuentaId)
         {
-            List<Movimiento> movimientos = new List<Movimiento>();
-            movimientos = await _context.Movimientos.Where(movimiento => movimiento.CuentaId == CuentaId).ToListAsync();
+            List<Movimiento?> movimientos = await _context.Movimientos.Where(movimiento => movimiento.CuentaId == CuentaId).ToListAsync();
+            return movimientos;
 
-            if (movimientos != null && movimientos.Count > 0)
-            {
-                return movimientos;
-            }
-            else
-            {
-                return null;
-            }
         }
 
         public async Task<Movimiento> ObtenerMovimientosPorId(int Id)

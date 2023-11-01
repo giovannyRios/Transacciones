@@ -57,9 +57,10 @@ namespace Transacciones.Dominio.Repository.Implements
 
         }
 
-        public async Task<Cuenta> ObtenerCuentaPorNumeroCuenta(string NumeroCuenta)
+        public async Task<Cuenta?> ObtenerCuentaPorNumeroCuenta(string NumeroCuenta)
         {
-            return await _context.Cuentas.Where(cuenta => cuenta.NumeroCuenta == NumeroCuenta).FirstOrDefaultAsync();
+            Cuenta? cuenta = await _context.Cuentas.Where(cuenta => cuenta.NumeroCuenta == NumeroCuenta).FirstOrDefaultAsync();
+            return cuenta;
         }
 
         public async Task<List<Cuenta>> ObtenerCuentas()

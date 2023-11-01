@@ -14,32 +14,35 @@ namespace Transacciones.Controllers
     {
         private readonly IClienteService _clienteService;
         private readonly IGeneroService _generoService;
-        public ClientesController(IClienteService clienteService, IGeneroService genero)
+        private readonly ILogger<ClientesController> _logger;
+        public ClientesController(IClienteService clienteService, IGeneroService genero,ILogger<ClientesController> logger)
         {
             _clienteService = clienteService;
             _generoService = genero;
+            _logger = logger;
         }
 
         [HttpGet]
         [Route("ObtenerClientes")]
-        public async Task<IActionResult> ObtenerClientes()
+        public async Task<IActionResult> obtenerClientes()
         {
             try
             {
-                List<ClienteDTO> consulta = await _clienteService.obtenerClientes();
-                List<ClienteDTO> resultado = new List<ClienteDTO>();
-                foreach (ClienteDTO Cliente in consulta)
+                List<ClienteDTO> consultaClientes = await _clienteService.obtenerClientes();
+                List<ClienteDTO> resultadoClientes = new List<ClienteDTO>();
+                foreach (ClienteDTO Cliente in consultaClientes)
                 {
                     int Id = Cliente.GeneroId ?? 0;
                     var genero = await _generoService.ObtenerGeneroPorId(Cliente.GeneroId ?? 0);
                     Cliente.ValorGenero = genero != null ? genero.Valor : "Sin genero";
-                    resultado.Add(Cliente);
+                    resultadoClientes.Add(Cliente);
                 }
-                return Ok(resultado);
+                return Ok(resultadoClientes);
 
             }
             catch (Exception ex)
             {
+                _logger.LogError(ex, "Ha ocurrido un error al momento de consultar las Clientes en el metodo 'ObtenerClientes'");
                 return Problem($"Ha ocurrido un error al momento de consultar las Clientes, verifique: {ex.InnerException.Message}");
             }
         }
@@ -50,16 +53,15 @@ namespace Transacciones.Controllers
         {
             try
             {
-                int Id = 0;
                 bool resultado = false;
 
-                //valida el modelo
+                //valida el modelo y retorna el mensaje de error de los dataAnnotations de ClienteDTO
                 if (!ModelState.IsValid)
                 {
-                    return BadRequest(ModelState);
+                    _logger.LogWarning($"Modelo de datos invalido al adicionar el usuario {ClienteDTO.Identificacion}");
+                    return BadRequest(ModelState.Values.SelectMany(error => error.Errors).Select(mensaje => mensaje.ErrorMessage).ToList());
                 }
 
-                //Se adiciona la Cliente
                 ClienteDTO ClienteDTO2 = ClienteDTO.Clone() as ClienteDTO;
                 resultado = await _clienteService.AdicionarCliente(ClienteDTO2);
                 if (resultado)
@@ -69,6 +71,7 @@ namespace Transacciones.Controllers
             }
             catch (Exception ex)
             {
+                _logger.LogError(ex, "Error en el metodo 'AdicionarCliente'");
                 return Problem($"Ha ocurrido un error al momento de adicionar el usuario, verifique: {ex.InnerException.Message}");
             }
         }
@@ -81,16 +84,20 @@ namespace Transacciones.Controllers
             {
                 bool resultado = false;
 
-                //valida el modelo
+                //valida el modelo y retorna el mensaje de error de los dataAnnotations de ClienteDTO
                 if (!ModelState.IsValid)
                 {
-                    return BadRequest(ModelState);
+                    _logger.LogWarning($"Modelo de datos invalido al actualizar el usuario {ClienteDTO.Identificacion}");
+                    return BadRequest(ModelState.Values.SelectMany(error => error.Errors).Select(mensaje => mensaje.ErrorMessage).ToList());
                 }
 
                 ClienteDTO Cliente = await _clienteService.ObtenerClientePorNumeroIdentificacion(ClienteDTO.Identificacion);
 
-                if (Cliente == null)
+                if (Cliente == null) 
+                {
+                    _logger.LogWarning($"La Cliente enviada con los siguientes datos: {ClienteDTO.ToString()} no existe en el sistema");
                     return BadRequest($"La Cliente enviada con los siguientes datos: {ClienteDTO.ToString()} no existe en el sistema");
+                }
 
                 resultado = await _clienteService.ActualizarCliente(ClienteDTO);
 
@@ -98,6 +105,7 @@ namespace Transacciones.Controllers
             }
             catch (Exception ex)
             {
+                _logger.LogError(ex, $"Ha ocurrido un error al momento de adicionar el usuario, verifique");
                 return Problem($"Ha ocurrido un error al momento de adicionar el usuario, verifique: {ex.InnerException.Message}");
             }
         }
@@ -111,16 +119,21 @@ namespace Transacciones.Controllers
             {
                 bool resultado = false;
 
-                //valida el modelo
+                //valida el modelo y retorna el mensaje de error de los dataAnnotations de ClienteDTO
                 if (!ModelState.IsValid)
                 {
-                    return BadRequest(ModelState);
+                    _logger.LogWarning($"Modelo de datos invalido al eliminar el usuario {numeroIdentificacion}");
+                    return BadRequest(ModelState.Values.SelectMany(error => error.Errors).Select(mensaje => mensaje.ErrorMessage).ToList()); return BadRequest(ModelState);
                 }
 
                 ClienteDTO Cliente = await _clienteService.ObtenerClientePorNumeroIdentificacion(numeroIdentificacion);
 
-                if (Cliente == null)
+                if (Cliente == null) 
+                {
+                    _logger.LogWarning($"El numero de identificacion={numeroIdentificacion} enviado no tiene Cliente asociada en el sistema");
                     return BadRequest($"El numero de identificacion={numeroIdentificacion} enviado no tiene Cliente asociada en el sistema");
+                }
+                    
 
                 resultado = await _clienteService.eliminarCliente(Cliente);
 
@@ -128,6 +141,7 @@ namespace Transacciones.Controllers
             }
             catch (Exception ex)
             {
+                _logger.LogError(ex, $"Ha ocurrido un error al momento de eliminar el usuario, recuerde que si la Cliente tiene cuentas asociadas no puede eliminarlo, verifique");
                 return Problem($"Ha ocurrido un error al momento de eliminar el usuario, recuerde que si la Cliente tiene cuentas asociadas no puede eliminarlo, verifique: {ex.InnerException.Message}");
             }
         }
@@ -138,21 +152,23 @@ namespace Transacciones.Controllers
         {
             try
             {
-                ClienteDTO consulta = await _clienteService.ObtenerClientePorNumeroIdentificacion(Identificacion);
-                if (consulta != null && !string.IsNullOrEmpty(consulta.Identificacion))
+                ClienteDTO consultaCliente = await _clienteService.ObtenerClientePorNumeroIdentificacion(Identificacion);
+                if (consultaCliente != null && !string.IsNullOrEmpty(consultaCliente.Identificacion))
                 {
-                    var genero = await _generoService.ObtenerGeneroPorId((int)consulta.GeneroId);
-                    consulta.ValorGenero = genero.Valor;
-                    return Ok(consulta);
+                    var genero = await _generoService.ObtenerGeneroPorId((int)consultaCliente.GeneroId);
+                    consultaCliente.ValorGenero = genero.Valor;
+                    return Ok(consultaCliente);
                 }
                 else
                 {
+                    _logger.LogWarning($"Cliente con numero de identificacion {Identificacion} no encontrado");
                     return BadRequest("Cliente no encontrada");
                 }
 
             }
             catch (Exception ex)
             {
+                _logger.LogError(ex, $"Ha ocurrido un error al momento de consultar la Cliente por Identificacion, verifique");
                 return Problem($"Ha ocurrido un error al momento de consultar la Cliente por Identificacion, verifique: {ex.InnerException.Message}");
             }
         }

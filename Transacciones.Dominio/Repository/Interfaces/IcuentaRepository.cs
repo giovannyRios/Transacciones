@@ -8,7 +8,7 @@ namespace Transacciones.Dominio.Repository.Interfaces
 
         public Task<bool> EliminarCuenta(Cuenta cuenta);
 
-        public Task<Cuenta> ObtenerCuentaPorNumeroCuenta(string NumeroCuenta);
+        public Task<Cuenta?> ObtenerCuentaPorNumeroCuenta(string NumeroCuenta);
 
         public Task<List<Cuenta>> ObtenerCuentas();
 

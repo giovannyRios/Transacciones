@@ -8,7 +8,7 @@ namespace Transacciones.Dominio.Repository.Interfaces
 
         public bool RemoverGenero(Genero genero);
 
-        public Task<Genero> ObtenerGeneroPorId(int Id);
+        public Task<Genero?> ObtenerGeneroPorId(int Id);
 
         public Task<Genero> ObtenerGeneroPorValor(string valor);
 

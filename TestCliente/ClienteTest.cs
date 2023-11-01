@@ -1,6 +1,7 @@
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
+using Microsoft.Extensions.Logging;
 using Transacciones.Controllers;
 using Transacciones.Dominio.Context;
 using Transacciones.Dominio.Decorators.ClienteDecorator;
@@ -22,6 +23,7 @@ namespace TestCliente
         private readonly IGeneroRepository _generoRepository;
         private readonly IMemoryCache _memoryCache;
         private readonly IMapper _mapper;
+        private readonly ILogger<ClientesController> _logger;
         private readonly TransaccionesContext _context;
         private readonly MapperConfig _mapperConfig;
         private readonly IclienteDecorator _clienteDecorator;
@@ -33,7 +35,7 @@ namespace TestCliente
             _generoRepository = new GeneroRepository(_context);
             _clienteService = new ClienteService(_clienteRepository, _mapperConfig.getMappper(), _clienteDecorator);
             _generoService = new GenerosServices(_generoRepository, _mapperConfig.getMappper());
-            _clientesController = new ClientesController(_clienteService, _generoService);
+            _clientesController = new ClientesController(_clienteService, _generoService,_logger);
         }
 
         public async Task insertarUsuario()
@@ -61,7 +63,7 @@ namespace TestCliente
         [Fact]
         public async Task TestGetAllOkObjectResult()
         {
-            var result = await _clientesController.ObtenerClientes();
+            var result = await _clientesController.obtenerClientes();
             Assert.IsType<OkObjectResult>(result);
         }
 
@@ -70,7 +72,7 @@ namespace TestCliente
         [Fact]
         public async Task TestGetAllOkData()
         {
-            var result = await _clientesController.ObtenerClientes();
+            var result = await _clientesController.obtenerClientes();
             if (result is OkObjectResult resultado)
             {
                 var clientes = resultado.Value;

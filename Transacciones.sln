@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Transacciones.Negocio", "Tr
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestCliente", "TestCliente\TestCliente.csproj", "{485F01D3-ADB6-45C3-8073-0B31F0BBA23D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Transacciones.Dominio.IoCRegister", "Transacciones.Dominio.IoCRegister\Transacciones.Dominio.IoCRegister.csproj", "{9DEE5273-AF7C-4BF6-A863-8D45F8F00349}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Transacciones.Dominio.IoCRegister", "Transacciones.Dominio.IoCRegister\Transacciones.Dominio.IoCRegister.csproj", "{9DEE5273-AF7C-4BF6-A863-8D45F8F00349}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

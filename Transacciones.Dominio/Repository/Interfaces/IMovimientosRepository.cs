@@ -8,7 +8,7 @@ namespace Transacciones.Dominio.Repository.Interfaces
 
         public Task<bool> EliminarMovimiento(Movimiento movimiento);
 
-        public Task<List<Movimiento>> ObtenerMovimientosPorCuentaId(int CuentaId);
+        public Task<List<Movimiento?>> ObtenerMovimientosPorCuentaId(int CuentaId);
 
         public Task<Movimiento> ObtenerMovimientosPorId(int Id);
 

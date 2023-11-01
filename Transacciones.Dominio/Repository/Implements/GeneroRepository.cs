@@ -31,9 +31,11 @@ namespace Transacciones.Dominio.Repository.Implements
             return _context.SaveChanges() > 0;
         }
 
-        public async Task<Genero> ObtenerGeneroPorId(int Id)
+        public async Task<Genero?> ObtenerGeneroPorId(int Id)
         {
-            return await _context.Generos.Where(genero => genero.Id == Id).FirstOrDefaultAsync();
+
+            Genero? genero = await _context.Generos.Where(genero => genero.Id == Id).FirstOrDefaultAsync();
+            return genero;
         }
 
         public async Task<Genero> ObtenerGeneroPorValor(string valor)
