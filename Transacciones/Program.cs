@@ -19,9 +19,6 @@ try
 {
     var builder = WebApplication.CreateBuilder(args);
 
-    string baseDirectory = System.IO.Directory.GetCurrentDirectory();
-    Console.WriteLine($"Directorio Base: {baseDirectory}");
-
     builder.Services.AddControllers();
     // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
     builder.Services.AddEndpointsApiExplorer();
