@@ -11,7 +11,7 @@ namespace Transacciones.Dominio.IoCRegister
         {
             //Inyecta las dependencias de los repositorios para el proyecto Transacciones.Negocio
             builder.AddScoped<IclienteRepository, ClienteRepository>();
-            builder.AddScoped<IclienteDecorator, ClienteDecorator>();
+            builder.AddScoped<IclienteDecorator, ClienteDecorator>(); 
 
             builder.AddScoped<IcuentaRepository, CuentaRepository>();
             builder.AddScoped<IMovimientosRepository, MovimientoRepository>();

@@ -31,10 +31,13 @@ namespace TestCliente
         {
             _context = new TransaccionesContext();
             _mapperConfig = new MapperConfig();
+            _clienteRepository = new ClienteRepository(_context);
+            _memoryCache = new MemoryCache(new MemoryCacheOptions());
             _clienteDecorator = new ClienteDecorator(_clienteRepository, _memoryCache);
             _generoRepository = new GeneroRepository(_context);
             _clienteService = new ClienteService(_clienteRepository, _mapperConfig.getMappper(), _clienteDecorator);
             _generoService = new GenerosServices(_generoRepository, _mapperConfig.getMappper());
+            _logger = new LoggerFactory().CreateLogger<ClientesController>();
             _clientesController = new ClientesController(_clienteService, _generoService,_logger);
         }
 

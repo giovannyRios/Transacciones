@@ -27,7 +27,11 @@ public partial class TransaccionesContext : DbContext
     {
         if (!optionsBuilder.IsConfigured)
         {
-            optionsBuilder.UseSqlServer("Server=host.docker.internal\\SQLEXPRESS;Database=Transacciones;User Id=desarrollo;Password=Prueba123*;Encrypt=False;");
+            //Required by test cases
+            optionsBuilder.UseSqlServer("Server=LAPTOP-VGNNMU45\\SQLEXPRESS;Database=Transacciones;User Id=desarrollo;Password=Prueba123*;Encrypt=False;");
+
+            //Other configuration for project
+            //optionsBuilder.UseSqlServer("Server=host.docker.internal\\SQLEXPRESS;Database=Transacciones;User Id=desarrollo;Password=Prueba123*;Encrypt=False;");
         }
     }
 
